@@ -1,2 +1,7 @@
 # jetbrains IDE settings
 .idea
+
+# vscode settings
+.vscode
+
+php.ini
