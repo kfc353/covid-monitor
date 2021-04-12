@@ -5,3 +5,5 @@
 .vscode
 
 php.ini
+
+composer.json
