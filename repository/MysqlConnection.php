@@ -3,11 +3,11 @@
 // had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
 class MysqlConnection
 {
-  private static $instance;
+  private static MysqlConnection $instance;
 
-  private $connection;
+  private mysqli $connection;
 
-  public static function getInstance()
+  public static function getInstance(): MysqlConnection
   {
     if (!isset(self::$instance)) {
       self::$instance = new static();
@@ -26,7 +26,7 @@ class MysqlConnection
     $this->connection = new mysqli($host, $username, $password, $database);
   }
 
-  function getConnection()
+  function getMysqli(): mysqli
   {
     if (!isset($this->connection)) {
       $this->connectMysql();

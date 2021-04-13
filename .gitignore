@@ -4,6 +4,10 @@
 # vscode settings
 .vscode
 
+# local packages
+vendor
 php.ini
 
 composer.json
+/test.php
+/composer.lock
