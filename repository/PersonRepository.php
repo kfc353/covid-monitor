@@ -31,9 +31,9 @@ class PersonRepository
             $fatherMedicareNum);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row affected when insert. \n");
+            printf("No row affected when insert into Person. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when insert: %s\n", $stmt->error);
+            printf("Error occurred when insert into Person: %s\n", $stmt->error);
         }
         $stmt->close();
     }
@@ -63,20 +63,6 @@ class PersonRepository
         } else {
             return null;
         }
-    }
-
-    static function deleteByMedicareNum($medicareNum): void
-    {
-        $mysqli = MysqlConnection::getInstance()->getMysqli();
-        $stmt = $mysqli->prepare("DELETE FROM Person WHERE medicareNum = ?");
-        $stmt->bind_param("s", $medicareNum);
-        $stmt->execute();
-        if ($stmt->affected_rows == 0) {
-            printf("No row found by medicareNum when delete . \n");
-        } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when delete: %s\n", $stmt->error);
-        }
-        $stmt->close();
     }
 
     static function updateByMedicareNum($medicareNum, Person $person): void
@@ -122,6 +108,20 @@ class PersonRepository
             printf("No row found by medicareNum when update. \n");
         } else if ($stmt->affected_rows == -1) {
             printf("Error occurred when update: %s\n", $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    static function deleteByMedicareNum($medicareNum): void
+    {
+        $mysqli = MysqlConnection::getInstance()->getMysqli();
+        $stmt = $mysqli->prepare("DELETE FROM Person WHERE medicareNum = ?");
+        $stmt->bind_param("s", $medicareNum);
+        $stmt->execute();
+        if ($stmt->affected_rows == 0) {
+            printf("No row found by medicareNum when delete . \n");
+        } else if ($stmt->affected_rows == -1) {
+            printf("Error occurred when delete: %s\n", $stmt->error);
         }
         $stmt->close();
     }
