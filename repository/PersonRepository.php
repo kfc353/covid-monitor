@@ -29,6 +29,13 @@ class PersonRepository
             $email,
             $motherMedicareNum,
             $fatherMedicareNum);
+        $stmt->execute();
+        if ($stmt->affected_rows == 0) {
+            printf("No row affected when insert. \n");
+        } else if ($stmt->affected_rows == -1) {
+            printf("Error occurred when insert: %s\n", $stmt->error);
+        }
+        $stmt->close();
     }
 
     static function findAll(): array
@@ -36,8 +43,10 @@ class PersonRepository
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         $result = $mysqli->query("SELECT * FROM Person");
         $allPerson = array();
-        while($row = $result->fetch_assoc())
-            array_push($allPerson, self::createPersonFromAssoc($row));
+        while($row = $result->fetch_assoc()){
+            array_push($allPerson, new Person($row));
+        }
+
         return $allPerson;
     }
 
@@ -50,7 +59,7 @@ class PersonRepository
         $result = $stmt->get_result();
         $stmt->close();
         if ($row = $result->fetch_assoc()){
-            return self::createPersonFromAssoc($row);
+            return new Person($row);
         } else {
             return null;
         }
@@ -108,27 +117,15 @@ class PersonRepository
             $fatherMedicareNum,
             $medicareNum
         );
+        $stmt->execute();
+        if ($stmt->affected_rows == 0) {
+            printf("No row found by medicareNum when update. \n");
+        } else if ($stmt->affected_rows == -1) {
+            printf("Error occurred when update: %s\n", $stmt->error);
+        }
+        $stmt->close();
     }
 
-    private static function createPersonFromAssoc($assocArray): Person
-    {
-        $person = new Person();
-        $person->setMedicareNum($assocArray['medicareNum']);
-        $person->setFirstName($assocArray['firstName']);
-        $person->setLastName($assocArray['lastName']);
-        $person->setDateOfBirth($assocArray['dateOfBirth']);
-        $person->setAddress($assocArray['address']);
-        $person->setProvince($assocArray['province']);
-        $person->setCitizenship($assocArray['citizenship']);
-        $person->setEmail($assocArray['email']);
-        if (isset($assocArray['motherMedicareNum'])) {
-            $person->setMotherMedicareNum($assocArray['motherMedicareNum']);
-        }
-        if (isset($assocArray['fatherMedicareNum'])) {
-            $person->setFatherMedicareNum($assocArray['fatherMedicareNum']);
-        }
-        return $person;
-    }
 
 }
 

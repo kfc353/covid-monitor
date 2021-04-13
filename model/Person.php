@@ -2,25 +2,42 @@
 
 class Person
 {
-  private string $medicareNum;
-  private string $firstName;
-  private string $lastName;
-  private string $dateOfBirth;
-  private string $phoneNum;
-  private string $address;
-  private string $province;
-  private string $citizenship;
-  private string $email;
-  private string $motherMedicareNum;
-  private string $fatherMedicareNum;
+    protected string $medicareNum;
+    protected string $firstName;
+    protected string $lastName;
+    protected string $dateOfBirth;
+    protected string $phoneNum;
+    protected string $address;
+    protected string $province;
+    protected string $citizenship;
+    protected string $email;
+    protected string $motherMedicareNum;
+    protected string $fatherMedicareNum;
+
+    public function __construct(array $assocArray){
+        $this->setMedicareNum($assocArray['medicareNum']);
+        $this->setFirstName($assocArray['firstName']);
+        $this->setLastName($assocArray['lastName']);
+        $this->setDateOfBirth($assocArray['dateOfBirth']);
+        $this->setAddress($assocArray['address']);
+        $this->setProvince($assocArray['province']);
+        $this->setCitizenship($assocArray['citizenship']);
+        $this->setEmail($assocArray['email']);
+        if (isset($assocArray['motherMedicareNum'])) {
+            $this->setMotherMedicareNum($assocArray['motherMedicareNum']);
+        }
+        if (isset($assocArray['fatherMedicareNum'])) {
+            $this->setFatherMedicareNum($assocArray['fatherMedicareNum']);
+        }
+    }
 
     /**
      * @param string $medicareNum
      */
-  public function setMedicareNum(string $medicareNum)
-  {
-    $this->medicareNum = $medicareNum;
-  }
+    public function setMedicareNum(string $medicareNum)
+    {
+        $this->medicareNum = $medicareNum;
+    }
 
     /**
      * @param string $firstName
@@ -189,6 +206,5 @@ class Person
     {
         return $this->fatherMedicareNum;
     }
-
 
 }
