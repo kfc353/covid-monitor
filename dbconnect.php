@@ -15,5 +15,6 @@ $result = $mysqli->query("SELECT * FROM Person");
 for ($i = 0; $i < $result->num_rows; $i++) {
   $result->data_seek($i);
   $row = $result->fetch_assoc();
+  echo "<br>";
   echo " medicareNum = " . $row['medicareNum'] . "\n";
 }
