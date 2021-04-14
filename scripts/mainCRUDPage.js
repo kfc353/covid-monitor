@@ -65,7 +65,21 @@ function displayDatabaseSearch() {
             console.log("regionReport")
             break;
         case "messages":
-            console.log("messages")
+            let divToEdit = document.getElementById("dbSearchPrompt");
+            divToEdit.innerHTML =
+            "<input id=\"fromDate\" type=\"datetime-local\"><input id=\"toDate\" type=\"datetime-local\">";
+            divToEdit.style.display = "block";
+            console.log("messages");
             break;
     }
+}
+
+function getFromDate(){
+    let fromDateInput = document.getElementById("fromDate");
+    console.log(fromDateInput.value);
+}
+
+function getToDate(){
+    let toDateInput = document.getElementById("toDate");
+    console.log(toDateInput.value);
 }
