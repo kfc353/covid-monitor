@@ -1,0 +1,16 @@
+{
+    "name": "hugo/covid-monitor",
+    "description": "",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hugo Zheng",
+            "email": "zhenghugo515@gmail.com"
+        }
+    ],
+    "require": {
+      "ext-mysqli": "*",
+        "myclabs/php-enum": "^1.8"
+    }
+}

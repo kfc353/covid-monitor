@@ -8,6 +8,4 @@
 vendor
 php.ini
 
-composer.json
 /test.php
-/composer.lock

@@ -16,7 +16,7 @@ class HealthWorkerRepository
             if ($stmt->affected_rows == 0){
                 printf("No row affected when insert into HealthWorker. Entry already exists.\n");
             } else if ($stmt -> affected_rows == -1){
-                printf("Error occured when insert into HealthWorker: %s\n", $stmt->error);
+                printf("Error occurred when insert into HealthWorker: %s\n", $stmt->error);
             }
             $stmt->close();
         } else {

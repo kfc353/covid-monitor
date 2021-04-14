@@ -31,9 +31,9 @@ class PersonRepository
             $fatherMedicareNum);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row affected when insert into Person. Entry already exists.\n");
+            printf("No row affected when inserting into Person. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when insert into Person: %s\n", $stmt->error);
+            printf("Error occurred when inserting into Person: %s\n", $stmt->error);
         }
         $stmt->close();
     }
@@ -65,7 +65,7 @@ class PersonRepository
         }
     }
 
-    static function updateByMedicareNum($medicareNum, Person $person): void
+    static function updateByMedicareNum(Person $person): void
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         $stmt = $mysqli->prepare("UPDATE Person SET 
@@ -80,6 +80,7 @@ class PersonRepository
                   motherMedicareNum = ?,
                   fatherMedicareNum = ?
                   WHERE medicareNum = ?");
+        $medicareNum = $person->getMedicareNum();
         $firstName = $person->getFirstName();
         $lastName = $person->getLastName();
         $dateOfBirth = $person->getDateOfBirth();
@@ -105,9 +106,9 @@ class PersonRepository
         );
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row found by medicareNum when update. \n");
+            printf("No row updated in Person. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when update: %s\n", $stmt->error);
+            printf("Error occurred when update Person: %s\n", $stmt->error);
         }
         $stmt->close();
     }
@@ -119,9 +120,9 @@ class PersonRepository
         $stmt->bind_param("s", $medicareNum);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row found by medicareNum when delete . \n");
+            printf("No row deleted in Person. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when delete: %s\n", $stmt->error);
+            printf("Error occurred when delete Person: %s\n", $stmt->error);
         }
         $stmt->close();
     }
