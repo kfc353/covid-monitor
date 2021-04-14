@@ -84,6 +84,5 @@ class HealthFacilityRepository
             printf("Error occurred when delete HealthFacility: %s\n", $stmt->error);
         }
         $stmt->close();
-
     }
 }
