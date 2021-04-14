@@ -4,7 +4,10 @@
 # vscode settings
 .vscode
 
+# local packages
+vendor
 php.ini
 
-/vendor/
-composer.json
+
+/test.php
+
