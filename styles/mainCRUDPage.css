@@ -1,0 +1,13 @@
+h1 { 
+    text-align: center;
+    padding: 2rem 0;
+}
+
+legend{
+    font-size: 1.50rem;
+}
+
+fieldset{
+    width: 75%;
+    margin: 0 auto;
+}

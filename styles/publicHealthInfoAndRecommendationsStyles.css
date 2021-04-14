@@ -1,0 +1,11 @@
+h1 { 
+    text-align: center;
+    padding: 2rem 0;
+}
+
+p{
+    width: 75%;
+    margin: 0 auto;
+    line-height: 200%;
+    font-size: 1.25rem;
+}
