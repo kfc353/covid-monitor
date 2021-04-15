@@ -7,11 +7,8 @@
 <body>
 
     <?php
-    echo "test";
-    //phpinfo();
+    include 'navbar.php';
     include 'mainCRUDPage.php';
-
-    include 'publicHealthInfoAndRecommendations.php';
 
     
 

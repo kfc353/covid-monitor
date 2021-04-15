@@ -1,22 +1,14 @@
+<?php require_once "./dbconnect.php" ?>
 <?php
 echo "<div id='recommendationTable' style='display: none'>";
 
-        $allPeopleArray = PersonRepository::findAll();
-        echo "<table>";
-        foreach($allPeopleArray as $aPerson){
-            echo "<tr>";
-            $medicare = $aPerson->getMedicareNum();
-            echo "<td>$medicare</td>";
-            $firstName = $aPerson->getFirstName();
-            echo "<td>$firstName</td>";
-            $lastName = $aPerson->getLastName();
-            echo "<td>$lastName</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-        echo "</div>";
+$result = $mysqli->query("SELECT * FROM Recommendation");
+echo "<table>";
 
+// displays the latest recommendation
+$result->data_seek(0);
+$row = $result->fetch_assoc();
+echo "<tr><td>" . $row['recommendation'] . "</td></tr>";
 
-
-
-        
+echo "</table>";
+echo "</div>";
