@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="/styles/publicHealthInfoAndRecommendationsStyles.css">
-</head>
+
 <body>
 <!--TODO: link to this page-->
 <h1>Public Health Information & Recommendations</h1>
@@ -12,10 +8,3 @@ dummy text <br>text <br>text <br>text.
 asd
 </p>
 
-
-
-</body>
-
-
-
-</html>
