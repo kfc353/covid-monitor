@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <link rel="stylesheet" href="styles/global.css">
+
     <link rel="stylesheet" href="styles/publicHealthInfoAndRecommendationsStyles.css">
 </head>
+
 <body>
-    <?php include './navbar.php'?>
+    <?php include './navbar.php' ?>
     <h1>Public Health Information & Recommendations</h1>
     <?php
     require_once 'dbconnect.php';
@@ -14,7 +18,7 @@
     // displays the latest recommendation
     $result->data_seek(0);
     $row = $result->fetch_assoc();
-    echo  $row['recommendation'] ;
+    echo  $row['recommendation'];
 
     echo "</div>";
     ?>

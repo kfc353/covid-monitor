@@ -1,3 +1,8 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+
 .DisplayBlock{
     display: block;
 }
@@ -18,5 +23,22 @@ h1{
 .navBar{
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 10px 0;
+    text-align: center;
+    background-color: lightgrey;
+    
+}
+
+.navBar li{
+    display: inline-block;
+    padding: 10px;
+}
+
+.navBar li a{
+    text-decoration: none;
+    color: blue;
+}
+
+.navBar li a:visited{
+    color: blue;
 }
