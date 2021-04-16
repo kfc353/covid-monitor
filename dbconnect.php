@@ -9,6 +9,7 @@ $password = "Al3xB3st";
 // create connection
 
 $mysqli = new mysqli($host, $username, $password, $database);
+/*
 echo $mysqli->host_info . "\n";
 $result = $mysqli->query("SELECT * FROM Person");
 
@@ -17,4 +18,4 @@ for ($i = 0; $i < $result->num_rows; $i++) {
   $row = $result->fetch_assoc();
   echo "<br>";
   echo " medicareNum = " . $row['medicareNum'] . "\n";
-}
+}*/

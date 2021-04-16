@@ -61,7 +61,12 @@ class HealthFacility
      */
     public function setWebAddress(string $webAddress): void
     {
-        $this->webAddress = $webAddress;
+        if($webAddress == NULL){
+            $this->webAddress = '';
+        } else {
+            $this->webAddress = $webAddress;
+
+        }
     }
 
     /**

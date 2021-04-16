@@ -4,8 +4,11 @@ h1 {
 }
 
 p{
+    line-height: 125%;
+    font-size: 1.15rem;
+}
+
+div{
     width: 75%;
     margin: 0 auto;
-    line-height: 200%;
-    font-size: 1.25rem;
 }

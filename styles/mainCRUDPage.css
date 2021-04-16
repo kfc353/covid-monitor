@@ -11,3 +11,45 @@ fieldset{
     width: 75%;
     margin: 0 auto;
 }
+
+.adminSearchForm{
+    width: 75%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.formLeftCol{
+    width: 30%;
+    float: left;
+    display: block;
+    margin-top: 15px;
+}
+
+.formRightCol{
+    width: 70%;
+    float: left;
+    display: block;
+    margin-top: 15px;
+}
+
+.formRow{
+    margin: 0 auto;
+    width: 100%;
+    display: block;
+}
+
+.adminSearchForm * input[type=text]{
+    width: 100%;
+    display: inline-block;
+}
+
+.adminSearchForm * label{
+    display: inline-block;
+}
+
+.adminSearchForm * input[type=submit]{
+    margin-top: 20px;
+    float: right;
+}
+
+

@@ -24,7 +24,11 @@ class MysqlConnection
     private function connectMysql()
     {
         $osInfo = self::getOSInfo();
-        $host = $osInfo["name"] == "Scientific Linux" ? "kfc353.encs.concordia.ca" : "127.0.0.1:3307";
+        if($osInfo == null){
+            $host = "127.0.0.1:3307";
+        } else{
+            $osInfo["name"] == "Scientific Linux" ? "kfc353.encs.concordia.ca" : "127.0.0.1:3307";
+        }
         $database = "kfc353_4";
         $username = "kfc353_4";
         $password = "Al3xB3st";
