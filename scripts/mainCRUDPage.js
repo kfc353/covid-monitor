@@ -9,18 +9,18 @@ function createEntry() {
             console.log("person");
             break;
         case "pubHealthWorker":
-            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
-            healthWorkerCRUD.style.display = 'block';
+            var healthWorkerCreate = document.getElementById("healthWorkerCreate");
+            healthWorkerCreate.style.display = 'block';
             console.log("pubHealthWorker");
             break;
         case "facility":
-            var facilityTable = document.getElementById("facilityTable");
-            facilityTable.style.display = 'block';
+            var facilityCreate = document.getElementById("facilityCreate");
+            facilityCreate.style.display = 'block';
             console.log("facility");
             break;
         case "region":
-            var regionTable = document.getElementById("regionTable");
-            regionTable.style.display = 'block';
+            var regionCreate = document.getElementById("regionCreate");
+            regionCreate.style.display = 'block';
             console.log("region");
             break;
         case "groupZone":
@@ -55,18 +55,18 @@ function removeEntry() {
             console.log("person");
             break;
         case "pubHealthWorker":
-            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
-            healthWorkerCRUD.style.display = 'block';
+            var healthWorkerRemove = document.getElementById("healthWorkerRemove");
+            healthWorkerRemove.style.display = 'block';
             console.log("pubHealthWorker");
             break;
         case "facility":
-            var facilityTable = document.getElementById("facilityTable");
-            facilityTable.style.display = 'block';
+            var facilityRemove = document.getElementById("facilityRemove");
+            facilityRemove.style.display = 'block';
             console.log("facility");
             break;
         case "region":
-            var regionTable = document.getElementById("regionTable");
-            regionTable.style.display = 'block';
+            var regionRemove = document.getElementById("regionRemove");
+            regionRemove.style.display = 'block';
             console.log("region");
             break;
         case "groupZone":
@@ -103,18 +103,18 @@ function updateEntry() {
             console.log("person");
             break;
         case "pubHealthWorker":
-            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
-            healthWorkerCRUD.style.display = 'block';
+            var healthWorkerUpdate = document.getElementById("healthWorkerUpdate");
+            healthWorkerUpdate.style.display = 'block';
             console.log("pubHealthWorker");
             break;
         case "facility":
-            var facilityTable = document.getElementById("facilityTable");
-            facilityTable.style.display = 'block';
+            var facilityUpdate = document.getElementById("facilityUpdate");
+            facilityUpdate.style.display = 'block';
             console.log("facility");
             break;
         case "region":
-            var regionTable = document.getElementById("regionTable");
-            regionTable.style.display = 'block';
+            var regionUpdate = document.getElementById("regionUpdate");
+            regionUpdate.style.display = 'block';
             console.log("region");
             break;
         case "groupZone":
@@ -155,13 +155,13 @@ function displayManagementPage() {
             console.log("pubHealthWorker");
             break;
         case "facility":
-            var facilityTable = document.getElementById("facilityTable");
-            facilityTable.style.display = 'block';
+            var facilityCRUD = document.getElementById("facilityCRUD");
+            facilityCRUD.style.display = 'block';
             console.log("facility");
             break;
         case "region":
-            var regionTable = document.getElementById("regionTable");
-            regionTable.style.display = 'block';
+            var regionCRUD = document.getElementById("regionCRUD");
+            regionCRUD.style.display = 'block';
             console.log("region");
             break;
         case "groupZone":
@@ -229,8 +229,8 @@ function displayDatabaseSearch() {
 function hideAllManagement() {
     document.getElementById("personCRUD").style.display = 'none';
     document.getElementById("healthWorkerCRUD").style.display = 'none';
-    document.getElementById("facilityTable").style.display = 'none';
-    document.getElementById("regionTable").style.display = 'none';
+    document.getElementById("facilityCRUD").style.display = 'none';
+    document.getElementById("regionCRUD").style.display = 'none';
     document.getElementById("groupZoneTable").style.display = 'none';
     document.getElementById("recommendationTable").style.display = 'none';
     document.getElementById("addressTable").style.display = 'none';
@@ -251,6 +251,15 @@ function hideAllOperations(){
     document.getElementById("personCreate").style.display = 'none';
     document.getElementById("personRemove").style.display = 'none';
     document.getElementById("personUpdate").style.display = 'none';
+    document.getElementById("healthWorkerCreate").style.display = 'none';
+    document.getElementById("healthWorkerRemove").style.display = 'none';
+    document.getElementById("healthWorkerUpdate").style.display = 'none';
+    document.getElementById("facilityCreate").style.display = 'none';
+    document.getElementById("facilityRemove").style.display = 'none';
+    document.getElementById("facilityUpdate").style.display = 'none';
+    document.getElementById("regionCreate").style.display = 'none';
+    document.getElementById("regionRemove").style.display = 'none';
+    document.getElementById("regionUpdate").style.display = 'none';
 }
 
 function getFromDate() {

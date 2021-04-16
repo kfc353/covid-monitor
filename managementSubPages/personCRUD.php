@@ -120,7 +120,7 @@ echo "
 
         <div class='formRightCol'>
 
-            <input type='submit'>
+            <input type='submit' value='Create'>
             </div>
 
         </div>
@@ -132,7 +132,7 @@ echo "
 ";
 echo "<div id='personRemove' style='display: none;'>
 <form action=''>
-<p style='text-align: center; color: red;'>Enter the medicare number of the entry you wish to remove</h3>
+<p style='text-align: center; color: red;'>Enter the medicare number of the person you wish to remove</h3>
 
     <div class='adminSearchForm'>
         <div class='formRow'>
@@ -160,7 +160,7 @@ echo "<div id='personRemove' style='display: none;'>
 echo"
 <div id='personUpdate' style='display: none;'>
     <form action=''>
-        <p style='text-align: center; color: red;'>Enter the medicare number of the entry you wish to update</h3>
+        <p style='text-align: center; color: red;'>Enter the medicare number of the person you wish to update</h3>
 
         <div class='adminSearchForm'>
             <div class='formRow'>

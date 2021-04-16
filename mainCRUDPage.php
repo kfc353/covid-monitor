@@ -29,8 +29,8 @@
     </div>
     <?php include "managementSubPages/personCRUD.php" ?>
     <?php include "managementSubPages/healthWorkerCRUD.php" ?>
-    <?php include "managementSubPages/facilityTable.php" ?>
-    <?php include "managementSubPages/regionTable.php" ?>
+    <?php include "managementSubPages/facilityCRUD.php" ?>
+    <?php include "managementSubPages/regionCRUD.php" ?>
     <?php include "managementSubPages/groupZoneTable.php" ?>
     <?php include "managementSubPages/recommendationTable.php" ?>
     <!--TODO: adressTable.php-->
