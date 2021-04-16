@@ -5,6 +5,8 @@
 <h1>Administrative Search Page</h1>
 <!--TODO: Event Listener to display proper table-->
 
+
+
 <fieldset id="managementFieldset">
     <legend id="searchTitle">Management</legend>
     <!--Dropdown with options of tables to look at (e.g. people, workers, etc...)-->
@@ -25,8 +27,8 @@
         <button onClick=updateEntry()>Update entry</button>
 
     </div>
-    <?php include "managementSubPages/personTable.php" ?>
-    <?php include "managementSubPages/publicHealthWorkerTable.php" ?>
+    <?php include "managementSubPages/personCRUD.php" ?>
+    <?php include "managementSubPages/healthWorkerCRUD.php" ?>
     <?php include "managementSubPages/facilityTable.php" ?>
     <?php include "managementSubPages/regionTable.php" ?>
     <?php include "managementSubPages/groupZoneTable.php" ?>

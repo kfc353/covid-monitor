@@ -1,6 +1,6 @@
 <?php include './repository/HealthWorkerRepository.php'?>
 <?php
-echo "<div id='publicHealthWorkerTable' style='display: none'>";
+echo "<div id='healthWorkerCRUD' style='display: none'>";
 
 $allWorkersArray = HealthWorkerRepository::findAll();
 echo "<table>";

@@ -16,9 +16,12 @@ foreach ($allPeopleArray as $aPerson) {
 echo "</table>";
 */
 
-echo "<div id='personTable' style='display: none'>";
+echo "<div id='personCRUD' style='display: none'>";
+
+
 
 echo "
+<div id='personCreate' style='display: none'>
 <form action='' method='POST'>
     <div class='adminSearchForm'>
         <div class='formRow'>
@@ -125,5 +128,62 @@ echo "
     </div>
 
 </form>
+</div>
+";
+echo "<div id='personRemove' style='display: none;'>
+<form action=''>
+<p style='text-align: center; color: red;'>Enter the medicare number of the entry you wish to remove</h3>
+
+    <div class='adminSearchForm'>
+        <div class='formRow'>
+            <div class='formLeftCol'>
+                <label for='medicareNumRemove'>Medicare Number</label>
+            </div>
+            <div class='formRightCol'>
+                <input type='text' id='medicareNumRemove' name='medicareNumRemove' placeholder='AAAA 0000 0000 0000'>
+            </div>
+        </div>
+        <div class='formRow'>
+        <div class='formLeftCol'>
+        </div>
+
+        <div class='formRightCol'>
+
+            <input type='submit' value='Remove'>
+            </div>
+
+        </div>
+        </div>
+    
+</form>
+</div>";
+echo"
+<div id='personUpdate' style='display: none;'>
+    <form action=''>
+        <p style='text-align: center; color: red;'>Enter the medicare number of the entry you wish to update</h3>
+
+        <div class='adminSearchForm'>
+            <div class='formRow'>
+                <div class='formLeftCol'>
+                    <label for='medicareNumRemove'>Medicare Number</label>
+                </div>
+                <div class='formRightCol'>
+                    <input type='text' id='medicareNumUpdate' name='medicareNumUpdate' placeholder='AAAA 0000 0000 0000'>
+                </div>
+            </div>
+            <div class='formRow'>
+                <div class='formLeftCol'>
+                </div>
+
+                <div class='formRightCol'>
+
+                    <input type='submit' value='Find'>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
 ";
 echo "</div>";

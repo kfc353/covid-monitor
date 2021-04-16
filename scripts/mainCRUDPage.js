@@ -1,16 +1,62 @@
 // displays the appropriate information based on the query
 function createEntry() {
+    hideAllOperations();
     var selectedOption = document.getElementById("managementSelect").value;
-    hideAllManagement();
     switch (selectedOption) {
         case "person":
-            var personTable = document.getElementById("personTable");
-            personTable.style.display = 'block';
+            var personCreate = document.getElementById("personCreate");
+            personCreate.style.display = 'block';
             console.log("person");
             break;
         case "pubHealthWorker":
-            var publicHealthWorkerTable = document.getElementById("publicHealthWorkerTable");
-            publicHealthWorkerTable.style.display = 'block';
+            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
+            healthWorkerCRUD.style.display = 'block';
+            console.log("pubHealthWorker");
+            break;
+        case "facility":
+            var facilityTable = document.getElementById("facilityTable");
+            facilityTable.style.display = 'block';
+            console.log("facility");
+            break;
+        case "region":
+            var regionTable = document.getElementById("regionTable");
+            regionTable.style.display = 'block';
+            console.log("region");
+            break;
+        case "groupZone":
+            var groupZoneTable = document.getElementById("groupZoneTable");
+            groupZoneTable.style.display = 'block';
+            console.log("groupZone");
+            break;
+        case "pubHealthRecommend":
+            var recommendationTable = document.getElementById("recommendationTable");
+            recommendationTable.style.display = 'block';
+            console.log("pubHealthRecommend");
+            break;
+        case "address":
+            var addressTable = document.getElementById("addressTable");
+            addressTable.style.display = 'block';
+            console.log("address");
+            break;
+        default:
+            alert("Please select a category first.");
+            break;
+    }
+}
+
+// deletes selected entries
+function removeEntry() {
+    hideAllOperations();
+    var selectedOption = document.getElementById("managementSelect").value;
+    switch (selectedOption) {
+        case "person":
+            var personRemove = document.getElementById("personRemove");
+            personRemove.style.display = 'block';
+            console.log("person");
+            break;
+        case "pubHealthWorker":
+            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
+            healthWorkerCRUD.style.display = 'block';
             console.log("pubHealthWorker");
             break;
         case "facility":
@@ -45,30 +91,67 @@ function createEntry() {
     }
 }
 
-// deletes selected entries
-function removeEntry() {
-
-}
-
 
 // 
 function updateEntry() {
-
+    hideAllOperations();
+    var selectedOption = document.getElementById("managementSelect").value;
+    switch (selectedOption) {
+        case "person":
+            var personUpdate = document.getElementById("personUpdate");
+            personUpdate.style.display = 'block';
+            console.log("person");
+            break;
+        case "pubHealthWorker":
+            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
+            healthWorkerCRUD.style.display = 'block';
+            console.log("pubHealthWorker");
+            break;
+        case "facility":
+            var facilityTable = document.getElementById("facilityTable");
+            facilityTable.style.display = 'block';
+            console.log("facility");
+            break;
+        case "region":
+            var regionTable = document.getElementById("regionTable");
+            regionTable.style.display = 'block';
+            console.log("region");
+            break;
+        case "groupZone":
+            var groupZoneTable = document.getElementById("groupZoneTable");
+            groupZoneTable.style.display = 'block';
+            console.log("groupZone");
+            break;
+        case "pubHealthRecommend":
+            var recommendationTable = document.getElementById("recommendationTable");
+            recommendationTable.style.display = 'block';
+            console.log("pubHealthRecommend");
+            break;
+        case "address":
+            var addressTable = document.getElementById("addressTable");
+            addressTable.style.display = 'block';
+            console.log("address");
+            break;
+        default:
+            alert("Please select a category first.");
+            break;
+    }
 }
 
 // displays the selected option's management prompts
 function displayManagementPage() {
     var selectedOption = document.getElementById("managementSelect").value;
     hideAllManagement();
+    hideAllOperations();
     switch (selectedOption) {
         case "person":
-            var personTable = document.getElementById("personTable");
-            personTable.style.display = 'block';
+            var personCRUD = document.getElementById("personCRUD");
+            personCRUD.style.display = 'block';
             console.log("person");
             break;
         case "pubHealthWorker":
-            var publicHealthWorkerTable = document.getElementById("publicHealthWorkerTable");
-            publicHealthWorkerTable.style.display = 'block';
+            var healthWorkerCRUD = document.getElementById("healthWorkerCRUD");
+            healthWorkerCRUD.style.display = 'block';
             console.log("pubHealthWorker");
             break;
         case "facility":
@@ -144,8 +227,8 @@ function displayDatabaseSearch() {
 
 // hides all tables
 function hideAllManagement() {
-    document.getElementById("personTable").style.display = 'none';
-    document.getElementById("publicHealthWorkerTable").style.display = 'none';
+    document.getElementById("personCRUD").style.display = 'none';
+    document.getElementById("healthWorkerCRUD").style.display = 'none';
     document.getElementById("facilityTable").style.display = 'none';
     document.getElementById("regionTable").style.display = 'none';
     document.getElementById("groupZoneTable").style.display = 'none';
@@ -162,6 +245,12 @@ function hideAllDbSearches() {
     document.getElementById("reportForRegions").style.display = 'none';
     document.getElementById("listMessagesOfTimeframe").style.display = 'none';
 
+}
+
+function hideAllOperations(){
+    document.getElementById("personCreate").style.display = 'none';
+    document.getElementById("personRemove").style.display = 'none';
+    document.getElementById("personUpdate").style.display = 'none';
 }
 
 function getFromDate() {
