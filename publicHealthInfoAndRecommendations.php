@@ -1,7 +1,8 @@
 <?php include './navbar.php' ?>
     <h1>Public Health Information & Recommendations</h1>
     <?php
-    require_once 'dbconnect.php';
+    require_once 'repository/MysqlConnection.php';
+    $mysqli = MysqlConnection::getInstance()->getMysqli();
     $result = $mysqli->query("SELECT * FROM Recommendation");
     echo "<div class='infoAndRecommendations'>";
 

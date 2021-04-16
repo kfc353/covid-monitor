@@ -29,13 +29,9 @@ function createEntry() {
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
-            var recommendationTable = document.getElementById("recommendationTable");
-            recommendationTable.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
-            var addressTable = document.getElementById("addressTable");
-            addressTable.style.display = 'block';
             console.log("address");
             break;
         default:
@@ -75,13 +71,9 @@ function removeEntry() {
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
-            var recommendationTable = document.getElementById("recommendationTable");
-            recommendationTable.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
-            var addressTable = document.getElementById("addressTable");
-            addressTable.style.display = 'block';
             console.log("address");
             break;
         default:
@@ -123,13 +115,9 @@ function updateEntry() {
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
-            var recommendationTable = document.getElementById("recommendationTable");
-            recommendationTable.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
-            var addressTable = document.getElementById("addressTable");
-            addressTable.style.display = 'block';
             console.log("address");
             break;
         default:
@@ -170,13 +158,9 @@ function displayManagementPage() {
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
-            var recommendationTable = document.getElementById("recommendationTable");
-            recommendationTable.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
-            var addressTable = document.getElementById("addressTable");
-            addressTable.style.display = 'block';
             console.log("address");
             break;
     }
@@ -232,8 +216,6 @@ function hideAllManagement() {
     document.getElementById("facilityCRUD").style.display = 'none';
     document.getElementById("regionCRUD").style.display = 'none';
     document.getElementById("groupZoneTable").style.display = 'none';
-    document.getElementById("recommendationTable").style.display = 'none';
-    document.getElementById("addressTable").style.display = 'none';
 }
 
 function hideAllDbSearches() {
