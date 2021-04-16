@@ -14,24 +14,26 @@
     <h2>Required info</h2>
 
       Medicare Number: <input type="text" name="medicareNum"> <br> 
+      Password (Birthday): <input type="date" name="birthday"> <br> 
       <h3>Primary Symptoms</h3>
 
-      Fever: <input type="checkbox" name="fever"> <br>
-      Cough: <input type="checkbox" name="cough"> <br>
-      Shortness of Breath/Difficulty Breathing: <input type="checkbox" name="diffBreath"> <br>
-      Loss of Taste and Smell: <input type="checkbox" name="smellLoss"> <br>
+      Fever: <input type="checkbox" Value = "fever" name="symptoms[]"> <br>
+      Temperature: <input type="number" Value = "temperature" name="temperature"> <br>
+      Cough: <input type="checkbox" Value = "cough" name="symptoms[]"> <br>
+      Shortness of Breath/Difficulty Breathing: <input type="checkbox" Value = "diffBreathing" name="symptoms[]"> <br>
+      Loss of Taste and Smell: <input type="checkbox" Value = "smellLoss" name="symptoms[]"> <br>
 
       <h3>Secondary Symptoms</h3>
-      Nausea: <input type="checkbox" name="nausea"> <br>
-      Stomach Aches: <input type="checkbox" name="stomachAches"> <br>
-      Vomiting: <input type="checkbox" name="vomit"> <br>
-      Headache: <input type="checkbox" name="headache"> <br>
-      Muscle Pain: <input type="checkbox" name="musclePain"> <br>
-      Diarrhea: <input type="checkbox" name="diarrhea"> <br>
-      Sore Throat: <input type="checkbox" name="soreThroat"> <br>
+      Nausea: <input type="checkbox" Value = "nausea" name="symptoms[]"> <br>
+      Stomach Aches: <input type="checkbox" Value = "stomachAches" name="symptoms[]"> <br>
+      Vomiting: <input type="checkbox" Value = "vomit" name="symptoms[]"> <br>
+      Headache: <input type="checkbox" Value = "headache" name="symptoms[]"> <br>
+      Muscle Pain: <input type="checkbox" Value = "musclePain" name="symptoms[]"> <br>
+      Diarrhea: <input type="checkbox" Value = "diarrhea" name="symptoms[]"> <br>
+      Sore Throat: <input type="checkbox" Value = "soreThroat" name="symptoms[]"> <br>
 
       <h3>Additional Symptoms</h3>
-      Other Symptoms: <input type="text" name="other"> <br>
+      Other Symptoms: <input type="text" Value = "other" name="other"> <br>
 
 
 
