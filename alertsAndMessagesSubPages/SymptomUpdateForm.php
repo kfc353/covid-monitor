@@ -1,5 +1,7 @@
 <?php
-
+//Author: A Fulleringer
+//The Form to get info for updating the symptom history of a patient
+// had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
 ?>
 
 <html>
@@ -34,8 +36,6 @@
 
       <h3>Additional Symptoms</h3>
       Other Symptoms: <input type="text" Value = "other" name="other"> <br>
-
-
 
         <input type="hidden" name="form_submitted" value="1" />
 

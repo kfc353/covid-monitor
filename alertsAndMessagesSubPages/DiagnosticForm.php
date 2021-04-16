@@ -1,5 +1,7 @@
 <?php
-
+//Author: A Fulleringer
+//Requests information for adding a test result to Diagnostic table
+// had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
 ?>
 
 <html>
