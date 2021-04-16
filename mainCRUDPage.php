@@ -24,14 +24,14 @@
         <button>Update entry</button>
 
     </div>
-    <?php include "mainCRUDSubPages/personTable.php" ?>
-    <?php include "mainCRUDSubPages/publicHealthWorkerTable.php" ?>
-    <?php include "mainCRUDSubPages/facilityTable.php" ?>
-    <?php include "mainCRUDSubPages/regionTable.php" ?>
-    <?php include "mainCRUDSubPages/groupZoneTable.php" ?>
-    <?php include "mainCRUDSubPages/recommendationTable.php" ?>
+    <?php include "managementSubPages/personTable.php" ?>
+    <?php include "managementSubPages/publicHealthWorkerTable.php" ?>
+    <?php include "managementSubPages/facilityTable.php" ?>
+    <?php include "managementSubPages/regionTable.php" ?>
+    <?php include "managementSubPages/groupZoneTable.php" ?>
+    <?php include "managementSubPages/recommendationTable.php" ?>
     <!--TODO: adressTable.php-->
-    <?php include "mainCRUDSubPages/addressTable.php" ?>
+    <?php include "managementSubPages/addressTable.php" ?>
 </fieldset>
 
 <fieldset id="dbSearchesFieldset">
@@ -50,7 +50,14 @@
     </select>
     <button id="getFromDateButton" onClick=getFromDate()>getFromDate</button>
     <button id="getToDateButton" onClick=getToDate()>getToDate</button>
-    <div id="dbSearchPrompt" style="display:none;"></div>
+    <?php include "dbSearchesSubPages/listFacilities.php" ?>
+    <?php include "dbSearchesSubPages/listRegions.php" ?>
+    <?php include "dbSearchesSubPages/listPeopleAtAddress.php" ?>
+    <?php include "dbSearchesSubPages/listWorkersAtFacility.php" ?>
+    <?php include "dbSearchesSubPages/listPositiveWorkers.php" ?>
+    <?php include "dbSearchesSubPages/reportForRegions.php" ?>
+    <?php include "dbSearchesSubPages/listMessagesOfTimeFrame.php" ?>
+    
 </fieldset>
 
 <fieldset id="alertsAndMessagesFieldset">

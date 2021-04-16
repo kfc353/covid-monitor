@@ -60,30 +60,41 @@ function displayManagementPage() {
 // displays the results of the selected query
 function displayDatabaseSearch() {
     var selectedOption = document.getElementById("dbSearches").value;
+    hideAllDbSearches();
     switch (selectedOption) {
         case "facilities":
+            var listFacilities  = document.getElementById("listFacilities");
+            listFacilities.style.display = 'block';
             console.log("facilities");
             break;
         case "regions":
+            var listRegions = document.getElementById("listRegions");
+            listRegions.style.display = 'block';
             console.log("regions")
             break;
         case "peopleAtAddress":
+            var listPeopleAtAddress = document.getElementById("listPeopleAtAddress");
+            listPeopleAtAddress.style.display = 'block';
             console.log("peopleAtAddress")
             break;
         case "workersAtFacility":
+            var listWorkersAtFacility = document.getElementById("listWorkersAtFacility");
+            listWorkersAtFacility.style.display = 'block';
             console.log("workersAtFacility")
             break;
         case "positiveWorkers":
+            var listPositiveWorkers = document.getElementById("listPositiveWorkers");
+            listPositiveWorkers.style.display = 'block';
             console.log("positiveWorkers")
             break;
         case "regionReport":
+            var reportForRegions = document.getElementById("reportForRegions");
+            reportForRegions.style.display = 'block';
             console.log("regionReport")
             break;
         case "messages":
-            let divToEdit = document.getElementById("dbSearchPrompt");
-            divToEdit.innerHTML =
-            "<input id=\"fromDate\" type=\"datetime-local\"><input id=\"toDate\" type=\"datetime-local\">";
-            divToEdit.style.display = "block";
+            var listMessagesOfTimeframe = document.getElementById("listMessagesOfTimeframe");
+            listMessagesOfTimeframe.style.display = 'block';
             console.log("messages");
             break;
     }
@@ -96,8 +107,18 @@ function hideAllManagement(){
     document.getElementById("facilityTable").style.display = 'none';
     document.getElementById("regionTable").style.display = 'none';
     document.getElementById("groupZoneTable").style.display = 'none';
-    document.getElementById("recommendationTable").style.display = 'none';
+    document.getElementById("").style.display = 'none';
     document.getElementById("addressTable").style.display = 'none';
+}
+
+function hideAllDbSearches(){
+    document.getElementById("listFacilities").style.display = 'none';
+    document.getElementById("listRegions").style.display = 'none';
+    document.getElementById("listPeopleAtAddress").style.display = 'none';
+    document.getElementById("listWorkersAtFacility").style.display = 'none';
+    document.getElementById("listPositiveWorkers").style.display = 'none';
+    document.getElementById("reportForRegions").style.display = 'none';
+    document.getElementById("listMessagesOfTimeframe").style.display = 'none';
     
 }
 
