@@ -9,7 +9,7 @@ $password = "Al3xB3st";
 
 // create connection
 
-$mysqli = new mysqli($host, $username, $password, $database);
+$mysqli = MysqlConnection::getInstance()->getMysqli();
 echo $mysqli->host_info . "\n";
 
 // $regions = $mysqli->query("SELECT DISTINCT region FROM CityRegion");
