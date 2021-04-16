@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <link rel="stylesheet" href="styles/global.css">
-
-    <link rel="stylesheet" href="styles/publicHealthInfoAndRecommendationsStyles.css">
-</head>
-
-<body>
-    <?php include './navbar.php' ?>
+<?php include './navbar.php' ?>
     <h1>Public Health Information & Recommendations</h1>
     <?php
     require_once 'dbconnect.php';
@@ -22,6 +12,3 @@
 
     echo "</div>";
     ?>
-</body>
-
-</html>
