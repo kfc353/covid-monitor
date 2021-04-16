@@ -1,19 +1,5 @@
 <?php require_once "repository/PersonRepository.php" ?>
-<?php/*
-$allPeopleArray = PersonRepository::findAll();
-echo "<table>";
-foreach ($allPeopleArray as $aPerson) {
-    echo "<tr>";
-    $medicare = $aPerson->getMedicareNum();
-    echo "<td>$medicare</td>";
-    $firstName = $aPerson->getFirstName();
-    echo "<td>$firstName</td>";
-    $lastName = $aPerson->getLastName();
-    echo "<td>$lastName</td>";
-    echo "</tr>";
-}
-echo "</table>";
-*/?>
+
 
 <div id='personCRUD' style='display: none'>
 
