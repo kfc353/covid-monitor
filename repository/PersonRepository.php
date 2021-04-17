@@ -8,6 +8,7 @@ class PersonRepository
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         $stmt = $mysqli->prepare("INSERT INTO Person VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $medicareNum = $person->getMedicareNum();
         $firstName = $person->getFirstName();
         $lastName = $person->getLastName();
         $dateOfBirth = $person->getDateOfBirth();
@@ -18,8 +19,8 @@ class PersonRepository
         $email = $person->getEmail();
         $motherMedicareNum = $person->getMotherMedicareNum();
         $fatherMedicareNum = $person->getFatherMedicareNum();
-        $stmt->bind_param(
-            "sssssssssss",
+        $stmt->bind_param("sssssssssss",
+            $medicareNum,
             $firstName,
             $lastName,
             $dateOfBirth,

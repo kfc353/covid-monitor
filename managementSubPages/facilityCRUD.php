@@ -1,51 +1,57 @@
 <?php require_once "repository/HealthFacilityRepository.php" ?>
-
+<?php
+  if(isset($_POST['facilityNameCreate']) && isset($_POST['facilityAddressCreate']) &&
+  isset($_POST['facilityWebAddressCreate']) && isset($_POST['facilityTypeCreate']) &&
+  isset($_POST['facilityAcceptMethod'])){
+    
+  }
+?>
 <div id='facilityCRUD' style='display: none'>
 
 
 
   <div id='facilityCreate' style='display: none'>
-    <form action='' method='POST'>
+    <form action='' method='post'>
       <div class='adminSearchForm'>
 
         <div class='formRow'>
           <div class='formLeftCol'>
-            <label for='facilityName'>Facility Name</label>
+            <label for='facilityNameCreate'>Facility Name</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityName' name='facilityName'>
+            <input type='text' id='facilityNameCreate' name='facilityNameCreate'>
           </div>
         </div>
         <div class='formRow'>
           <div class='formLeftCol'>
-            <label for='facilityAddress'>Facility Address</label>
+            <label for='facilityAddressCreate'>Facility Address</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityAddress' name='facilityAddress'>
+            <input type='text' id='facilityAddressCreate' name='facilityAddressCreate'>
           </div>
         </div>
         <div class='formRow'>
           <div class='formLeftCol'>
-            <label for='facilityWebAddress'>Web Address</label>
+            <label for='facilityWebAddressCreate'>Web Address</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityWebAddress' name='facilityWebAddress' placeholder='ex. www.yourfacility.com'>
+            <input type='text' id='facilityWebAddressCreate' name='facilityWebAddressCreate' placeholder='ex. www.yourfacility.com'>
           </div>
         </div>
         <div class='formRow'>
           <div class='formLeftCol'>
-            <label for='facilityType'>Facility Type</label>
+            <label for='facilityTypeCreate'>Facility Type</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityType' name='facilityType' placeholder='clinic, special installment, or hospital'>
+            <input type='text' id='facilityTypeCreate' name='facilityTypeCreate' placeholder='clinic, special installment, or hospital'>
           </div>
         </div>
         <div class='formRow'>
           <div class='formLeftCol'>
-            <label for='facilityAcceptMethod'>Test Approval Method</label>
+            <label for='facilityAcceptMethodCreate'>Test Approval Method</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityAcceptMethod' name='facilityAcceptMethod' placeholder='walk-in or appointment'>
+            <input type='text' id='facilityAcceptMethodCreate' name='facilityAcceptMethodCreate' placeholder='walk-in or appointment'>
           </div>
         </div>
         <div class='formRow'>

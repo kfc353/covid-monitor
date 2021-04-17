@@ -12,7 +12,7 @@
 
     <h2>Symptom Updates</h2>
 
-    <form action="SymptomUpdate.php" method="POST"> 
+    <form action="SymptomUpdate.php" method="post"> 
     <h2>Required info</h2>
 
       Medicare Number: <input type="text" name="medicareNum"> <br> 

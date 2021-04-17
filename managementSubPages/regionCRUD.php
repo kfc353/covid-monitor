@@ -1,15 +1,15 @@
 <?php require_once './repository/RegionRepository.php' ?>
 <div id='regionCRUD' style='display: none'>
     <div id='regionCreate' style='display: none'>
-        <form action='' method='POST'>
+        <form action='' method='post'>
             <div class='adminSearchForm'>
 
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='regionName'>Region Name</label>
+                        <label for='regionNameCreate'>Region Name</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='regionName' name='regionName'>
+                        <input type='text' id='regionNameCreate' name='regionNameCreate'>
                     </div>
                 </div>
                 <div class='formRow'>
