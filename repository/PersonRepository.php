@@ -18,7 +18,8 @@ class PersonRepository
         $email = $person->getEmail();
         $motherMedicareNum = $person->getMotherMedicareNum();
         $fatherMedicareNum = $person->getFatherMedicareNum();
-        $stmt->bind_param("sssssssssss",
+        $stmt->bind_param(
+            "sssssssssss",
             $firstName,
             $lastName,
             $dateOfBirth,
@@ -28,12 +29,14 @@ class PersonRepository
             $citizenship,
             $email,
             $motherMedicareNum,
-            $fatherMedicareNum);
+            $fatherMedicareNum
+        );
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row affected when inserting into Person. Entry already exists.\n");
+            throw new Exception("No row affected when inserting into Person. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when inserting into Person: %s\n", $stmt->error);
+            sprintf("Error occurred when inserting into Person: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when inserting into Person: %s\n", $stmt->error));
         }
         $stmt->close();
     }
@@ -43,7 +46,7 @@ class PersonRepository
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         $result = $mysqli->query("SELECT * FROM Person");
         $allPerson = array();
-        while($row = $result->fetch_assoc()){
+        while ($row = $result->fetch_assoc()) {
             array_push($allPerson, new Person($row));
         }
 
@@ -58,7 +61,7 @@ class PersonRepository
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-        if ($row = $result->fetch_assoc()){
+        if ($row = $result->fetch_assoc()) {
             return new Person($row);
         } else {
             return null;
@@ -91,7 +94,8 @@ class PersonRepository
         $email = $person->getEmail();
         $motherMedicareNum = $person->getMotherMedicareNum();
         $fatherMedicareNum = $person->getFatherMedicareNum();
-        $stmt->bind_param("sssssssssss",
+        $stmt->bind_param(
+            "sssssssssss",
             $firstName,
             $lastName,
             $dateOfBirth,
@@ -106,9 +110,9 @@ class PersonRepository
         );
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row updated in Person. \n");
+            throw new Exception("No row updated in Person. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when update Person: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when update Person: %s\n", $stmt->error));
         }
         $stmt->close();
     }
@@ -120,13 +124,10 @@ class PersonRepository
         $stmt->bind_param("s", $medicareNum);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row deleted in Person. \n");
+            throw new Exception("No row deleted in Person. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when delete Person: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when delete Person: %s\n", $stmt->error));
         }
         $stmt->close();
     }
-
-
 }
-

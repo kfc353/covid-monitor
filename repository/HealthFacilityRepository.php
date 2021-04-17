@@ -18,9 +18,9 @@ class HealthFacilityRepository
             $name, $address, $webAddress, $type, $acceptMethod);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row affected when inserting into HealthFacility. Entry already exists.\n");
+            throw new Exception("No row affected when inserting into HealthFacility. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when inserting into HealthFacility: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when inserting into HealthFacility: %s\n", $stmt->error));
         }
         $stmt->close();
     }
@@ -65,9 +65,9 @@ class HealthFacilityRepository
             , $acceptMethod, $name, $address);
         $stmt->execute();
         if ($stmt -> affected_rows == 0){
-            printf("No row updated in HealthFacility. \n");
+            throw new Exception("No row updated in HealthFacility. \n");
         } else if ($stmt -> affected_rows == -1){
-            printf("Error occurred when update HealthFacility: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when update HealthFacility: %s\n", $stmt->error));
         }
         $stmt->close();
     }
@@ -79,9 +79,9 @@ class HealthFacilityRepository
         $stmt->bind_param("ss", $name, $address);
         $stmt->execute();
         if ($stmt->affected_rows == 0){
-            printf("No row deleted in HealthFacility");
+            throw new Exception("No row deleted in HealthFacility");
         } else {
-            printf("Error occurred when delete HealthFacility: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when delete HealthFacility: %s\n", $stmt->error));
         }
         $stmt->close();
     }

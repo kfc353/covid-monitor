@@ -12,9 +12,9 @@ class GroupZoneRepository
         $stmt->bind_param("s", $groupZoneId);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row affected when inserting into GroupZone. Entry already exists.\n");
+            throw new Exception("No row affected when inserting into GroupZone. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when inserting into GroupZone: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when inserting into GroupZone: %s\n", $stmt->error));
         }
         $stmt->close();
     }
@@ -52,9 +52,9 @@ class GroupZoneRepository
         $stmt->bind_param("s", $id);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row deleted in GroupZone. \n");
+            throw new Exception("No row deleted in GroupZone. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when delete GroupZone: %s\n", $stmt->error);
+           throw new Exception(sprintf("Error occurred when delete GroupZone: %s\n", $stmt->error));
         }
         $stmt->close();
     }

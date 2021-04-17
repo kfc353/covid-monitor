@@ -11,9 +11,9 @@ class RecommendationRepository
         $stmt->bind_param("s", $recommend);
         $stmt->execute();
         if ($stmt->affected_rows == 0){
-            printf("No row updated in Recommendation");
+            throw new Exception("No row updated in Recommendation");
         } else if ($stmt->affected_rows == -1){
-            printf("Error occurred when update Recommendation");
+            throw new Exception(sprintf("Error occurred when update Recommendation"));
         }
     }
 }
