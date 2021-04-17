@@ -41,9 +41,9 @@ class RegionRepository
         $stmt->bind_param("s", $region);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
-            printf("No row deleted in CityRegion. \n");
+            throw new Exception("No row deleted in CityRegion. \n");
         } else if ($stmt->affected_rows == -1) {
-            printf("Error occurred when delete CityRegion: %s\n", $stmt->error);
+            throw new Exception(sprintf("Error occurred when delete CityRegion: %s\n", $stmt->error));
         }
     }
 
