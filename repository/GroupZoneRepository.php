@@ -25,7 +25,7 @@ class GroupZoneRepository
         $result = $mysqli->query("SELECT * FROM GroupZone");
         $allResults = array();
         while ($row = $result->fetch_assoc()) {
-            array_push($allResults, new GroupZone($row));
+            array_push($allResults, new GroupZone($row['groupZoneID']));
         }
         return $allResults;
     }
@@ -39,7 +39,7 @@ class GroupZoneRepository
         $result = $stmt->get_result();
         $stmt->close();
         if ($row = $result->fetch_assoc()) {
-            return new GroupZone($row);
+            return new GroupZone($row['groupZoneID']);
         } else {
             return null;
         }
