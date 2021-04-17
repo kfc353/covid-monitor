@@ -419,22 +419,38 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
       $HealthWorkerDateOfPerform->data_seek($i);
       $row4 = $HealthWorkerDateOfPerform->fetch_assoc();
       
-      echo nl2br("\n The date of perform: " . $row4['dateOfPerform'] . "\n");
+      $endDate = date('Y-m-d' , strtotime($row4['dateOfPerform']));
 
+      $date = date_create($endDate);
+      date_sub($date, date_interval_create_from_date_string('14 days'));
 
-      // FINISH THE PART BELOW ( GET THE PAST 14 DAYS )
+      $startDate = date_format($date, 'Y-m-d H:i:s');
 
-      // $result = strtotime($row4['dateOfPerform']);
-      // $data_input = getdate($result);
+      $employessWorkedWith = $mysqli->query("SELECT * FROM Person WHERE medicareNum IN(
+          SELECT healthWorkerMedicareNum FROM Service WHERE startDateTime >= '". $startDate ."' 
+          AND startDateTime <= '". $endDate ."' AND healthFacilityName = '". $specificFacility ."')");
 
-      // print_r($data_input);
+      if($employessWorkedWith->num_rows >0){
 
-      // $employessWorkedWith = $mysqli->query("SELECT * FROM Person WHERE medicareNum
-      // IN(SELECT * FROM HealthWorker 
-      // WHERE medicareNum IN(SELECT patientMedicareNum from Diagnostic WHERE result = 'positive ' 
-      // AND dateOfPerform ='". $specificdate ."' AND healthFacilityName = '". $specificFacility ."'))");
+        for ($k = 0; $k < $employessWorkedWith->num_rows; $k++) {
+            $employessWorkedWith->data_seek($k);
+            $row5 = $employessWorkedWith->fetch_assoc();
+            $x = $k + 1;
+            
+            echo nl2br("Medicare Num $x= " . $row5['medicareNum'] . "\t" . " First Name = " . $row5['firstName'] . "\t" . " Last Name = " . $row5['lastName'] . "\t" . " Date Of Birth = " . $row5['dateOfBirth'] . 
+            "\t" . " Phone Number = " . $row5['phoneNum'] . "\t" . " Address = " . $row5['address']  . "\t" . " Province = " . $row5['province'].  "\t" . " Citizenship = " . $row5['citizenship']
+            . "\t" . " Email = " . $row5['email']); // writing into the webpage 
+            fwrite($myfile,"Medicare Num $x= " . $row5['medicareNum'] . "\t" . " First Name = " . $row5['firstName'] . "\t" . " Last Name = " . $row5['lastName'] . "\t" . " Date Of Birth = " . $row5['dateOfBirth'] . 
+            "\t" . " Phone Number = " . $row5['phoneNum'] . "\t" . " Address = " . $row5['address']  . "\t" . " Province = " . $row5['province'].  "\t" . " Citizenship = " . $row5['citizenship']
+            . "\t" . " Email = " . $row5['email']); // writing into a file 
+            
+        }
+      }else{
 
-     
+        echo("0 Employee Cases \n");
+        fwrite($myfile, "0 Employee Cases\n");
+
+      }
     }
 
   }else{
@@ -468,45 +484,57 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
       fwrite($myfile,"Region Name $x= " . $row['region'] . "\n"); // writing into a file 
 
 
-// FIX THE PART BELOW TO ONLY GET THE LATEST VALUE OF THE TEST 
+    // TODO: FIX THE PART BELOW TO ONLY GET THE LATEST VALUE OF THE TEST ( order table based on time and get the desc and limit to 1)
 
-      $numberOfPostiveCases = $mysqli->query("SELECT  * FROM Diagnostic d2 WHERE patientMedicareNum IN(
-      SELECT medicareNum FROM Person p WHERE address IN(
-      SELECT address FROM AddressPostalCode apc WHERE postalCode IN(
-      SELECT postalCode FROM PostalCodeCity pcc WHERE city IN(
-      SELECT city FROM CityRegion cr WHERE region = '". $row['region']."')))) AND `result` = 'Positive'");
-
-
-      if($numberOfPostiveCases->num_rows > 0){
-        
-        echo nl2br("Number of positive Cases in this region: " . $numberOfPostiveCases->num_rows ."\n"); // writing into the webpage 
-        fwrite($myfile,"Number of positive Cases in this region: " . $numberOfPostiveCases->num_rows ."\n"); // writing into a file 
-
-      }else{
-
-        echo("0 Postive Cases in this region \n");
-        fwrite($myfile, "0 Postive Cases in this region \n");
-        
-      }
-   
-       $numberOfNegativeCases = $mysqli->query("SELECT  * FROM Diagnostic d2 WHERE patientMedicareNum IN(
+      $numberOfCases = $mysqli->query("SELECT  DISTINCT patientMedicareNum FROM Diagnostic d2 
+        WHERE patientMedicareNum IN(
         SELECT medicareNum FROM Person p WHERE address IN(
         SELECT address FROM AddressPostalCode apc WHERE postalCode IN(
         SELECT postalCode FROM PostalCodeCity pcc WHERE city IN(
-        SELECT city FROM CityRegion cr WHERE region = '". $row['region']."')))) AND `result` = 'negative'");
+        SELECT city FROM CityRegion cr WHERE region = '". $row['region'] ."'))))");
+
+        if($numberOfCases->num_rows > 0){
+
+            $positiveCases = 0;
+            $negativeCases = 0;
         
+            for ($k = 0; $k < $numberOfCases->num_rows; $k++) {
+                $numberOfCases->data_seek($k);
+                $row2 = $numberOfCases->fetch_assoc();
+                $x = $k + 1;
 
-      if($numberOfNegativeCases->num_rows > 0){
-      
-        echo nl2br("Number of Negative Cases in this region: " . $numberOfNegativeCases->num_rows ."\n"); // writing into the webpage 
-        fwrite($myfile,"Number of Negative Cases in this region: " . $numberOfNegativeCases->num_rows ."\n"); // writing into a file 
+                $numberOfPositiveCases = $mysqli->query("SELECT * FROM Diagnostic d 
+                WHERE patientMedicareNum = '". $row2['patientMedicareNum'] ."'
+                ORDER BY dateOfResult DESC 
+                LIMIT 1");
+                
+                $numberOfPositiveCases->data_seek($k);
+                $row3 = $numberOfPositiveCases->fetch_assoc();
 
-      }else{
+                if($row3['result'] == 'positive'){
+                    $positiveCases++;
+                }
 
-        echo("0 Negative Cases in this region \n");
-        fwrite($myfile, "0 Negative Cases in this region \n");
+                if($row3['result'] == 'negative'){
+                    $negativeCases++;
+                }
+
+            }
+
         
-      }
+        echo nl2br("Number of positive Cases in this region: " . $positiveCases ."\n"); // writing into the webpage 
+        fwrite($myfile,"Number of positive Cases in this region: " . $positiveCases ."\n"); // writing into a file 
+        echo nl2br("Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into the webpage 
+        fwrite($myfile,"Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into a file 
+
+
+
+        }else{
+
+            echo("0 number of cases  ");
+            fwrite($myfile, "0 number of cases ");
+
+        }
     }
 
   }else{
