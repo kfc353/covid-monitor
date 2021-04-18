@@ -40,7 +40,7 @@ if (isset($_POST['medicareNumCreate'])) {
         $array['fatherMedicareNum'] = $_POST['fatherMedicareNumUpdate'];
     }
     $updatedHealthWorker = new HealthWorker($array);
-    HealthWorkerRepository::updateByMedicareNum($medicareNum, $updatedHealthWorker);
+    HealthWorkerRepository::updateByMedicareNum($updatedHealthWorker);
 }
 
 ?>

@@ -109,6 +109,7 @@ class PersonRepository
             $fatherMedicareNum,
             $medicareNum
         );
+        printf("in person");
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
             throw new Exception("No row updated in Person. \n");
