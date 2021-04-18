@@ -527,14 +527,39 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
         echo nl2br("Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into the webpage 
         fwrite($myfile,"Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into a file 
 
-
-
         }else{
 
             echo("0 number of cases  ");
             fwrite($myfile, "0 number of cases ");
 
         }
+
+        $historyOfAlerts = $mysqli->query("SELECT * FROM AlertHistory ah  WHERE region = '". $row['region'] ."' 
+        AND alertDateTime >= '". $specificStartDate ."' AND alertDateTime <= '". $specificEndDate ."'");
+
+
+        if($historyOfAlerts->num_rows > 0){
+
+          for ($p = 0; $p < $historyOfAlerts->num_rows; $p++) {
+              $historyOfAlerts->data_seek($p);
+              $row4 = $historyOfAlerts->fetch_assoc();
+              $x = $p + 1;
+
+             echo nl2br("ID = " . $row4['id'] . "\t" . "Level = " . $row4['level'] . "\t" . 
+            "Alert Date and Time = " . $row4['alertDateTime'] . "\t" . "\n"); // writing into the webpage 
+             fwrite($myfile,"ID = " . $row4['id'] . "\t" . "Level = " . $row4['level'] . "\t" . 
+             "Alert Date and Time = " . $row4['alertDateTime'] . "\t" . "\n"); // writing into a file 
+
+          }
+
+        }else{
+
+          echo("0 Alert History Results ");
+          fwrite($myfile, "0 Alert History Results ");
+
+        }
+
+
     }
 
   }else{
@@ -644,6 +669,6 @@ allPeopleInSpecificAddress($mysqli, '3, 3rd avenue');
 listOfPoepleOnSpecificDate($mysqli, '2021-01-11 00:00:00');
 listOfHealthWorkersInSpecificFacility($mysqli, 'Viau Public Health Center');
 listOfHealthWorkersTestedPositive($mysqli, '2021-04-15 22:50:54' ,'Viau Public Health Center');
-regionReport($mysqli, '2021-04-22 13:50:00', '2021-04-25 02:51:03' );
+regionReport($mysqli, '2021-04-12 23:24:18', '2021-04-12 23:30:23' );
 allMessagesGenerated($mysqli, '2021-04-15 22:50:35', '2021-04-15 22:53:16' );
 
