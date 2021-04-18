@@ -24,9 +24,27 @@
 
       
     } elseif(isset($_POST['medicareNumRemove'])){
+        $medicareNum = $_POST['medicareNumRemove'];
+        PersonRepository::deleteByMedicareNum($medicareNum);
 
     } elseif(isset($_POST['medicareNumUpdate'])){
-
+        $array['medicareNum'] = $_POST['medicareNumUpdate'];
+        $array['firstName'] = $_POST['firstNameUpdate'];
+        $array['lastName'] = $_POST['lastNameUpdate'];
+        $array['dateOfBirth'] = $_POST['dateOfBirthUpdate'];
+        $array['phoneNumber'] = $_POST['phoneNumberUpdate'];
+        $array['address'] = $_POST['addressUpdate'];
+        $array['province'] = $_POST['provinceUpdate'];
+        $array['citizenship'] = $_POST['citizenshipUpdate'];
+        $array['email'] = $_POST['emailUpdate'];
+        if(!($_POST['motherMedicareNumUpdate'] == null)){
+            $array['motherMedicareNum'] = $_POST['motherMedicareNumUpdate'];
+        } 
+        if(!($_POST['fatherMedicareNumUpdate'] == null)){
+            $array['fatherMedicareNum'] = $_POST['fatherMedicareNumUpdate'];
+        }
+        $updatedPerson = new Person($array);
+        PersonRepository::updateByMedicareNum($updatedPerson);
     }
 
 ?>
@@ -171,30 +189,111 @@
         </form>
     </div>
 
-    <div id='personUpdate' style='display: none;'>
-        <form action='' method="post" id="personUpdateForm">
-            <p style='text-align: center; color: red;'>Enter the medicare number of the person you wish to update</h3>
-
+    <div id='personUpdate' style='display: none'>
+        <form action='' method='post' id='personUpdateForm'>
             <div class='adminSearchForm'>
                 <div class='formRow'>
                     <div class='formLeftCol'>
                         <label for='medicareNumUpdate'>Medicare Number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='medicareNumUpdate' name='medicareNumUpdate' placeholder='AAAA00000000' 
-                        required pattern="[A-Z]{4}[0-9]{8}">
+                        <input type='text' id='medicareNumUpdate' name='medicareNumUpdate' placeholder='AAAA00000000' required pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='firstNameUpdate'>First Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='firstNameUpdate' name='firstNameUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='lastNameUpdate'>Last Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='lastNameUpdate' name='lastNameUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='dateOfBirthUpdate'>Date of Birth</label>
+
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='date' id='dateOfBirthUpdate' name='dateOfBirthUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='phoneNumberUpdate'>Phone Number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='phoneNumberUpdate' name='phoneNumberUpdate' placeholder='1-(123)123-1234' required pattern="^[0-9]{1,3}\-\([0-9]{3}\)[0-9]{3}\-[0-9]{4}$">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='addressUpdate'>Address</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='addressUpdate' name='addressUpdate' placeholder='(ex. 123, 4th avenue)' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='provinceUpdate'>Province</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='provinceUpdate' name='provinceUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='citizenshipUpdate'>Citizenship</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='citizenshipUpdate' name='citizenshipUpdate' placeholder='ex. Canadian' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='emailUpdate'>Email address</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='emailUpdate' name='emailUpdate' placeholder='ex. youremail@email.com'
+                        required pattern="^\w{1,}@\w{1,}\.\w{1,}$">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='motherMedicareNumUpdate'>Mother's medicare number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='motherMedicareNumUpdate' name='motherMedicareNumUpdate' placeholder='AAAA00000000'  pattern="[A-Z]{4}[0-9]{8}">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='fatherMedicareNumUpdate'>Father's medicare number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='fatherMedicareNumUpdate' name='fatherMedicareNumUpdate' placeholder='AAAA00000000'  pattern="[A-Z]{4}[0-9]{8}">
+                    </div>
+                </div>
+
                 <div class='formRow'>
                     <div class='formLeftCol'>
                     </div>
 
                     <div class='formRightCol'>
-                        <button form='personUpdateForm'>Find</button>
 
+                        <button form='personUpdateForm'>Update</button>
                     </div>
 
                 </div>
+
             </div>
 
         </form>

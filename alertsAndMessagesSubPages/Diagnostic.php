@@ -73,5 +73,6 @@ if ($testResult == "positive"){
     }
 }
 
-
+header("Location: ../index.php");
+exit();
 ?>
