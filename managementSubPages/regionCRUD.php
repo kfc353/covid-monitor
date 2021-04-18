@@ -1,7 +1,7 @@
 <?php require_once './repository/RegionRepository.php' ?>
 <div id='regionCRUD' style='display: none'>
     <div id='regionCreate' style='display: none'>
-        <form action='' method='post'>
+        <form action='' method='post' id="regionCreateForm">
             <div class='adminSearchForm'>
 
                 <div class='formRow'>
@@ -17,8 +17,8 @@
                     </div>
 
                     <div class='formRightCol'>
+                    <button form='regionCreateForm'>Create</button>
 
-                        <input type='submit' value='Create'>
                     </div>
 
                 </div>
@@ -27,7 +27,7 @@
         </form>
     </div>
     <div id='regionRemove' style='display: none;'>
-        <form action=''>
+        <form action='' method="post" id="regionRemoveForm">
             <p style='text-align: center; color: red;'>Enter the name of the region that you want to remove</h3>
 
             <div class='adminSearchForm'>
@@ -44,8 +44,8 @@
                     </div>
 
                     <div class='formRightCol'>
+                        <button form='regionRemoveForm'>Remove</button>
 
-                        <input type='submit' value='Remove'>
                     </div>
 
                 </div>
@@ -55,7 +55,7 @@
     </div>
 
     <div id='regionUpdate' style='display: none;'>
-        <form action=''>
+        <form action='' method="post" id="regionUpdateForm">
             <p style='text-align: center; color: red;'>Enter the name of the region that you wish to update</h3>
 
             <div class='adminSearchForm'>
@@ -73,8 +73,8 @@
                     </div>
 
                     <div class='formRightCol'>
+                        <button form='regionUpdateForm'>Update</button>
 
-                        <input type='submit' value='Find'>
                     </div>
 
                 </div>
