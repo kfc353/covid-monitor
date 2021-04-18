@@ -51,7 +51,7 @@ class RegionRepository
         if ($stmt->affected_rows == 0) {
             throw new Exception("No row updated in Region. \n");
         } else if ($stmt->affected_rows == -1) {
-            throw new Exception(sprintf("Error occurred when update Region: %s\n"));
+            throw new Exception(sprintf("Error occurred when update Region: %s\n", $stmt->error));
         }
     }
 
