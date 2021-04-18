@@ -1,4 +1,16 @@
-<?php require_once "repository/RecommendationRepository.php" ?>
+<?php require_once "repository/RecommendationRepository.php";
+if(isset($_POST['regionNameCreate'])){
+    RegionRepository::save($_POST['regionNameCreate']);
+} elseif(isset($_POST['recommendationIDRemove'])){
+    $recommendationIDRemove = $_POST['recommendationIDRemove'];
+    RecommendationRepository::deleteByRecommendationId($recommendationId);
+
+} elseif(isset($_POST['regionNameUpdate'])){
+    $oldRegionName = $_POST['regionNameUpdate'];
+    $newRegionName = $_POST['newRegionName'];
+    RegionRepository::update($oldRegionName, $newRegionName);
+}
+?>
 
 
 <div id='recommendationCRUD' style='display: none'>
@@ -71,7 +83,7 @@
                     </div>
 
                     <div class='formRightCol'>
-                        <button form='recommendationUpdateForm'>Find</button>
+                        <button form='recommendationUpdateForm'>Update</button>
 
                     </div>
 

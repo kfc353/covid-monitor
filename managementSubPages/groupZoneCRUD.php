@@ -1,4 +1,18 @@
-<?php require_once "repository/GroupZoneRepository.php" ?>
+<?php require_once "repository/GroupZoneRepository.php";
+if(isset($_POST['groupZoneIDCreate'])){
+    $newString = $_POST['groupZoneIDCreate'];
+    $newGroupZoneID = new GroupZone($newString);
+    GroupZoneRepository::save($newGroupZoneID);
+} elseif(isset($_POST['groupZoneIDRemove'])){
+    $groupZoneID = $_POST['groupZoneIDRemove'];
+    GroupZoneRepository::deleteByGroupZoneId($groupZoneID);
+
+} elseif(isset($_POST['groupZoneIDUpdate'])){
+    $oldgroupZoneID = $_POST['groupZoneIDUpdate'];
+    $newgroupZoneID = $_POST['newGroupZoneID'];
+    GroupZoneRepository::update($oldgroupZoneID, $newgroupZoneID);
+}
+?>
 
 
 <div id='groupZoneCRUD' style='display: none'>
@@ -72,10 +86,18 @@
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
+                        <label for='newGroupZoneID'>New Group Zone Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='newGroupZoneID' name='newGroupZoneID' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
                     </div>
 
                     <div class='formRightCol'>
-                        <button form='groupZoneUpdateForm'>Find</button>
+                        <button form='groupZoneUpdateForm'>Update</button>
 
                     </div>
 

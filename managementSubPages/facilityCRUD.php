@@ -64,7 +64,8 @@ if (isset($_POST['facilityNameCreate'])) {
             <label for='facilityTypeCreate'>Facility Type</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityTypeCreate' name='facilityTypeCreate' placeholder='clinic, special installment, or hospital'>
+            <input type='text' id='facilityTypeCreate' name='facilityTypeCreate' 
+            placeholder='clinic, special installment, or hospital' required pattern="^clinic$|^special installment$|^hospital$">
           </div>
         </div>
         <div class='formRow'>
@@ -72,7 +73,8 @@ if (isset($_POST['facilityNameCreate'])) {
             <label for='facilityAcceptMethodCreate'>Test Approval Method</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityAcceptMethodCreate' name='facilityAcceptMethodCreate' placeholder='walk-in or appointment'>
+            <input type='text' id='facilityAcceptMethodCreate' name='facilityAcceptMethodCreate' 
+            placeholder='walk-in, appointment or both' required pattern="^walk\-in$|^appointment$|^both$">
           </div>
         </div>
         <div class='formRow'>
@@ -91,7 +93,7 @@ if (isset($_POST['facilityNameCreate'])) {
     </form>
   </div>
   <div id='facilityRemove' style='display: none;'>
-    <form action='' method="post" id="facilityCreateForm">
+    <form action='' method="post" id="facilityRemoveForm">
       <p style='text-align: center; color: red;'>Enter the name and address of the facility you wish to remove</h3>
 
       <div class='adminSearchForm'>
@@ -117,7 +119,7 @@ if (isset($_POST['facilityNameCreate'])) {
 
           <div class='formRightCol'>
 
-          <button form='facilityCreateForm'>Create</button>
+          <button form='facilityRemoveForm'>Remove</button>
 
           </div>
 
@@ -162,7 +164,8 @@ if (isset($_POST['facilityNameCreate'])) {
             <label for='facilityTypeUpdate'>Facility Type</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityTypeUpdate' name='facilityTypeUpdate' placeholder='clinic, special installment, or hospital'>
+            <input type='text' id='facilityTypeUpdate' name='facilityTypeUpdate' 
+            placeholder='clinic, special installment, or hospital' required pattern="^clinic$|^special installment$|^hospital$">
           </div>
         </div>
         <div class='formRow'>
@@ -170,7 +173,8 @@ if (isset($_POST['facilityNameCreate'])) {
             <label for='facilityAcceptMethodUpdate'>Test Approval Method</label>
           </div>
           <div class='formRightCol'>
-            <input type='text' id='facilityAcceptMethodUpdate' name='facilityAcceptMethodUpdate' placeholder='walk-in or appointment'>
+            <input type='text' id='facilityAcceptMethodUpdate' name='facilityAcceptMethodUpdate' 
+            placeholder='walk-in, appointment or both' required pattern="^walk\-in$|^appointment$|^both$">
           </div>
         </div>
         <div class='formRow'>
@@ -178,7 +182,7 @@ if (isset($_POST['facilityNameCreate'])) {
           </div>
 
           <div class='formRightCol'>
-          <button form='facilityCreateForm'>Update</button>
+          <button form='facilityUpdateForm'>Update</button>
 
           </div>
 

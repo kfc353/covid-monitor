@@ -1,4 +1,17 @@
-<?php require_once './repository/RegionRepository.php' ?>
+<?php require_once './repository/RegionRepository.php';
+if(isset($_POST['regionNameCreate'])){
+    RegionRepository::save($_POST['regionNameCreate']);
+} elseif(isset($_POST['regionNameRemove'])){
+    $regionName = $_POST['regionNameRemove'];
+    RegionRepository::deleteByRegion($regionName);
+
+} elseif(isset($_POST['regionNameUpdate'])){
+    $oldRegionName = $_POST['regionNameUpdate'];
+    $newRegionName = $_POST['newRegionName'];
+    RegionRepository::update($oldRegionName, $newRegionName);
+}
+
+?>
 <div id='regionCRUD' style='display: none'>
     <div id='regionCreate' style='display: none'>
         <form action='' method='post' id="regionCreateForm">
@@ -65,6 +78,12 @@
                     </div>
                     <div class='formRightCol'>
                         <input type='text' id='regionNameUpdate' name='regionNameUpdate'>
+                    </div>
+                    <div class='formLeftCol'>
+                        <label for='newRegionName'>New Region Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='newRegionName' name='newRegionName'>
                     </div>
                 </div>
 

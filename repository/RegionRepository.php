@@ -6,7 +6,7 @@ class RegionRepository
     static function save(string $region): void
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
-        $stmt = $mysqli->prepare("INSERT INTO Region VALUES ?");
+        $stmt = $mysqli->prepare("INSERT INTO Region VALUES (?)");
         $stmt->bind_param("s", $region);
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
