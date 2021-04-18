@@ -9,3 +9,4 @@ final class FacilityType extends Enum
     private const clinic = "clinic";
     private const specialInstallment = "special installment";
 }
+ 

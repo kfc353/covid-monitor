@@ -1,5 +1,6 @@
 <?php
-
+require_once "FacilityType.php";
+require_once "AcceptMethod.php";
 class HealthFacility
 {
     private string $name;

@@ -1,11 +1,11 @@
 <?php require_once "repository/HealthFacilityRepository.php" ?>
 <?php
-/*if (isset($_POST['facilityNameCreate'])) {
+if (isset($_POST['facilityNameCreate'])) {
   $array['name'] = $_POST['facilityNameCreate'];
   $array['address'] = $_POST['facilityAddressCreate'];
   $array['webAddress'] = $_POST['facilityWebAddressCreate'];
   $array['type'] = $_POST['facilityTypeCreate'];
-  $array['acceptMethod'] = $_POST['acceptMethodCreate'];
+  $array['acceptMethod'] = $_POST['facilityAcceptMethodCreate'];
 
   $createdFacility = new HealthFacility($array);
   HealthFacilityRepository::save($createdFacility);
@@ -22,7 +22,7 @@
 
   $updatedFacility = new HealthFacility($array);
   HealthFacilityRepository::updateByNameAddress($updatedFacility);
-}*/
+}
 
 ?>
 <div id='facilityCRUD' style='display: none'>
