@@ -38,7 +38,15 @@ if ($result->num_rows == 0){
 $row = $result->fetch_assoc();
 
 $address = $row['address'];
+$result2 = $mysqli->query("SELECT * FROM Person WHERE medicareNum = '$personMedNum'");
+$result3 = $mysqli->query("SELECT * FROM HealthWorker WHERE medicareNum = '$healthMedNum'");
 
+if ($result->num_rows == 0){
+    exit("Please input a valid Patient Health Care Number");
+}
+if ($result->num_rows == 0){
+    exit("Please input a valid HealthWorker Medicare Number");
+}
 $theQuery = "INSERT INTO Diagnostic(patientMedicareNum, dateOfPerform, healthWorkerMedicareNum, result, healthFacilityName, HealthFacilityAddress, dateOfResult) 
 VALUES ('$personMedNum', '$testTime','$healthMedNum', '$testResult', '$healthFacility', '$address', now());";
 //print($theQuery . '<br>');
