@@ -15,6 +15,11 @@ echo nl2br($mysqli->host_info . "\n\n");
 function listOfAllFacilites($mysqli){
 
   $allFacilities = $mysqli->query("SELECT * FROM HealthFacility");
+
+  $myfile = fopen("Testing.txt", "w") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("List of all facilities: \n");
+  fwrite($myfile , "List of all facilities: \n");
   
   if($allFacilities->num_rows > 0){
   
@@ -26,41 +31,40 @@ function listOfAllFacilites($mysqli){
       $numOfWorkers = $mysqli->query("SELECT DISTINCT healthWorkerMedicareNum FROM Service 
       WHERE healthFacilityName in(SELECT name from HealthFacility WHERE name='" . $row['name'] . "')");
 
-      //checks if the # of workers in this facility is not 0 
       if($numOfWorkers->num_rows > 0){
 
-        // prints the number of workers in each facility 
         echo nl2br("\n Number of workers in this facility: $numOfWorkers->num_rows\n");
+        fwrite($myfile,"\n Number of workers in this facility: $numOfWorkers->num_rows\n");
         
       }else{
-
-        // no workers are work at this facility 
         echo("0 Workers ");
-
+        fwrite($myfile, "0 Workers  ");
       }
     
-      //checks if webpage is available or not 
       if(isset($row['webAddress'])){
 
-        // print the info of the facilities with available webaddress
         echo nl2br("Name $x= " . $row['name'] . "\t" . " Facility Address = " . $row['address'] . "\t" . " WebAddress = " . $row['webAddress'] . "\t" . " Type = " . $row['type'] . "\t" 
         . "Accept Method = " . $row['acceptMethod'] . "\t" . "\n"); // writing into the webpage 
+        fwrite($myfile,"Name $x= " . $row['name'] . "\t" . " Facility Address = " . $row['address'] . "\t" . " WebAddress = " . $row['webAddress'] . "\t" . " Type = " . $row['type'] . "\t" 
+        . "Accept Method = " . $row['acceptMethod'] . "\t" . "\n"); // writing into a file 
 
       }else{
 
-        // print the info of the facilities with no webaddress
         echo nl2br("Name $x= " . $row['name'] . "\t" . " Facility Address = " . $row['address'] . "\t" . " WebAddress = N/A" . "\t" . " Type = " . $row['type'] . "\t" 
         . "Accept Method = " . $row['acceptMethod'] . "\t" . "\n"); // writing into the webpage 
+        fwrite($myfile,"Name $x= " . $row['name'] . "\t" . " Facility Address = " . $row['address'] . "\t" . " WebAddress = N/A" . "\t" . " Type = " . $row['type'] . "\t" 
+        . "Accept Method = " . $row['acceptMethod'] . "\t" . "\n"); // writing into a file 
 
       }
-
+     
     }
+    fclose($myfile); //file close 
   
   }else{
-
-    // no available facilities 
-    echo("0 facilities found ");
-
+  
+    echo("0 Results");
+    fwrite($myfile, "0 Results");
+    fclose($myfile); //file close 
   }
 
 }
@@ -71,6 +75,11 @@ function listOfAllFacilites($mysqli){
 function listOfAllRegions($mysqli){
 
   $regions = $mysqli->query("SELECT DISTINCT region FROM CityRegion");
+
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nList of all regions: \n");
+  fwrite($myfile , "\n\nList of all regions: \n");
   
   // looping regions
   if($regions->num_rows > 0){
@@ -82,8 +91,8 @@ function listOfAllRegions($mysqli){
 
       $cities = $mysqli->query("SELECT city FROM CityRegion WHERE region ='" . $row['region'] . "'");
 
-      // prints out the region 
       echo nl2br("Region $x= " . $row['region'] ."\n"); // writing into the webpage 
+      fwrite($myfile,"Region $x= " . $row['region'] . "\n"); // writing into a file 
 
       //looping cities 
       if($cities->num_rows > 0){
@@ -95,8 +104,8 @@ function listOfAllRegions($mysqli){
 
           $postalCodes = $mysqli->query("SELECT postalCode FROM PostalCodeCity WHERE city ='" . $row2['city'] . "'");
 
-          // prints out the city in every region
           echo nl2br("\tCity $y = " . $row2['city'] . "\n"); // writing into the webpage 
+          fwrite($myfile,"\tCity $y = " . $row2['city'] . "\n"); // writing into a file 
 
           // looping postalCodes
           if($postalCodes->num_rows > 0){
@@ -106,31 +115,32 @@ function listOfAllRegions($mysqli){
               $row3 = $postalCodes->fetch_assoc();
               $z = $p + 1;
 
-              // prints out all the postal codes found in every city 
               echo nl2br("\tPostalCode $z = " . $row3['postalCode'] . "\n"); // writing into the webpage 
+              fwrite($myfile,"\tPostalCode $z = " . $row3['postalCode'] . "\n"); // writing into a file 
             }
 
           }else{
 
-            // no postal codes are found in a specific city 
-            echo nl2br("0 Postal Codes found \n ");
+            echo nl2br("0 Postal Codes\n ");
+            fwrite($myfile, "0 Postal Codes\n");
           }
 
         }
 
       }else{
 
-        // no cities found in this specific region 
-        echo nl2br("0 Cities found \n ");
+        echo nl2br("0 Cities\n ");
+        fwrite($myfile, "0 Cities\n  ");
 
       }
     }
-
+    fclose($myfile); //file close 
   
   }else{
   
-    // no regions found 
-    echo("0 regions found ");
+    echo("0 Results");
+    fwrite($myfile, "0 Results");
+    fclose($myfile); //file close 
   
   }
 
@@ -147,6 +157,11 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress){
   FROM AddressPostalCode apc
   where apc.address='" . $specificAddress. "')");
   
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nList of all people in a specific address: \n");
+  fwrite($myfile , "\n\nList of all people in a specific address: \n");
+  
   if($peopleInSpecificAddress->num_rows >0){
 
     for ($i = 0; $i < $peopleInSpecificAddress->num_rows; $i++) {
@@ -154,9 +169,10 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress){
       $row = $peopleInSpecificAddress->fetch_assoc();
       $x = $i + 1;
 
-      // prints out the information of the person 
       echo nl2br("Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
       "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address'] . "\t" . " Citizenship = " . $row['citizenship']); // writing into the webpage 
+      fwrite($myfile,"Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
+      "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address'] . "\t" . " Citizenship = " . $row['citizenship']); // writing into a file 
     
       $motherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['motherMedicareNum'] . "'");
       $FatherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['fatherMedicareNum'] . "'");
@@ -166,33 +182,36 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress){
       $row2 = $motherName->fetch_assoc();
       $row3 = $FatherName->fetch_assoc();
 
-      // if both mother and father available , print out their FName and Lname 
       if(isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName']);
-        
-      // if mother is available but father isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName']); // writing into a file 
+
       }elseif(isset($row2) && !isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A");
-        
-      // if father is available but mother isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A"); // writing into a file 
+
       }elseif(!isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName']);
-        
-      // if neither mother nor father are available 
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName']); // writing into a file 
+
       }else{
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = N/A");
-        
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = N/A"); // writing into a file 
+
       }
     }
+    
+    fclose($myfile); //file close 
 
   }else{
 
-    // no people found in this specific address 
-    echo("0 people found ");
+    echo("0 Results");
+    fwrite($myfile, "0 Results");
+    fclose($myfile); //file close 
 
   }
   
@@ -208,6 +227,11 @@ function listOfPoepleOnSpecificDate($mysqli, $specificDate){
   $PoepleOnSpecificDateNegativeCases = $mysqli->query("SELECT firstName, lastName, dateOfBirth, phoneNum, email
   FROM Person WHERE medicareNum IN(SELECT patientMedicareNum FROM Diagnostic WHERE
   dateOfResult ='" . $specificDate ."' AND result = 'negative')");
+
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nLists all the people that got result on a specific date: \n");
+  fwrite($myfile , "\n\nLists all the people that got result on a specific date: \n");
   
   // looping through all positive cases
   echo nl2br("Postive Cases: \n");
@@ -218,16 +242,17 @@ function listOfPoepleOnSpecificDate($mysqli, $specificDate){
       $row = $PoepleOnSpecificDatePostiveCases->fetch_assoc();
       $x = $i + 1;
       
-      // printing out the info of the person that tested positive 
       echo nl2br(" First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
       "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Email = " . $row['email'] . "\n"); // writing into the webpage 
+      fwrite($myfile," First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
+      "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Email = " . $row['email'] . "\n"); // writing into a file 
      
     }
 
   }else{
   
-    // no positive cases were found on this date 
     echo("0 Postive Cases \n");
+    fwrite($myfile, "0 Postive Cases\n");
   
   }
 
@@ -240,17 +265,18 @@ function listOfPoepleOnSpecificDate($mysqli, $specificDate){
       $row2 = $PoepleOnSpecificDateNegativeCases->fetch_assoc();
       $x = $k + 1;
       
-      // printing out the info of the person that tested negative  
       echo nl2br(" First Name = " . $row2['firstName'] . "\t" . " Last Name = " . $row2['lastName'] . "\t" . " Date Of Birth = " . $row2['dateOfBirth'] . 
       "\t" . " Phone Number = " . $row2['phoneNum'] . "\t" . " Email = " . $row2['email'] . "\n"); // writing into the webpage 
+      fwrite($myfile," First Name = " . $row2['firstName'] . "\t" . " Last Name = " . $row2['lastName'] . "\t" . " Date Of Birth = " . $row2['dateOfBirth'] . 
+      "\t" . " Phone Number = " . $row2['phoneNum'] . "\t" . " Email = " . $row2['email'] . "\n"); // writing into a file 
      
     }
 
   }else{
   
-    // no negative cases were found on this date 
     echo("0 Negative Cases ");
- 
+    fwrite($myfile, "0 Negative Cases");
+    fclose($myfile); //file close   
   }
 
 }
@@ -262,6 +288,11 @@ function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
   $HealthWorkersInSpecificFacility = $mysqli->query("SELECT * FROM Person WHERE medicareNum
   IN(SELECT DISTINCT healthWorkerMedicareNum FROM Service 
   WHERE healthFacilityName IN(SELECT name from HealthFacility WHERE name='" . $specificFacility . "'))");
+
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nLists of all the  health workers in a specific facility: \n");
+  fwrite($myfile , "\n\nLists of all the health workers in a specific facility: \n");
   
   // Looping through all the health workers 
   if($HealthWorkersInSpecificFacility->num_rows > 0){
@@ -270,12 +301,13 @@ function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
       $HealthWorkersInSpecificFacility->data_seek($i);
       $row = $HealthWorkersInSpecificFacility->fetch_assoc();
       $x = $i + 1;
-
-      // prints out the info of the health worker 
+      
       echo nl2br("Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
       "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address']  . "\t" . " Province = " . $row['province'].  "\t" . " Citizenship = " . $row['citizenship']
       . "\t" . " Email = " . $row['email']); // writing into the webpage 
- 
+      fwrite($myfile,"Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
+      "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address']  . "\t" . " Province = " . $row['province'].  "\t" . " Citizenship = " . $row['citizenship']
+      . "\t" . " Email = " . $row['email']); // writing into a file 
 
       $motherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['motherMedicareNum'] . "'");
       $FatherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['fatherMedicareNum'] . "'");
@@ -285,25 +317,25 @@ function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
       $row2 = $motherName->fetch_assoc();
       $row3 = $FatherName->fetch_assoc();
 
-      // if both mother and father are available 
       if(isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n");
-        
-        // if mother is available but father isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n"); // writing into a file 
+
       }elseif(isset($row2) && !isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A\n\n");
-        
-        // if father is available but father isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A\n\n"); // writing into a file 
+
       }elseif(!isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n");
-       
-        // if neither mother nor father are available 
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n"); // writing into a file 
+
       }else{
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = N/A\n\n");
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = N/A\n\n"); // writing into a file 
 
       }
      
@@ -311,8 +343,9 @@ function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
 
   }else{
   
-    echo("0 health workers ");
-
+    echo("0 Postive Cases ");
+    fwrite($myfile, "0 Postive Cases");
+    fclose($myfile); //file close  
   }
 }
 
@@ -326,6 +359,11 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
   WHERE medicareNum IN(SELECT patientMedicareNum from Diagnostic WHERE result = 'positive ' 
   AND dateOfResult ='". $specificdate ."' AND healthFacilityName = '". $specificFacility ."'))");
 
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nLists of all the health workers who tested postive: \n");
+  fwrite($myfile , "\n\nLists of all the health workers who tested postive: \n");
+  
   // Looping through all the health workers 
   if($HealthWorkersTestedPositive->num_rows > 0){
   
@@ -334,10 +372,12 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
       $row = $HealthWorkersTestedPositive->fetch_assoc();
       $x = $i + 1;
       
-      // prints out the info of the health worker that tested positive 
       echo nl2br("Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
       "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address']  . "\t" . " Province = " . $row['province'].  "\t" . " Citizenship = " . $row['citizenship']
       . "\t" . " Email = " . $row['email']); // writing into the webpage 
+      fwrite($myfile,"Medicare Num $x= " . $row['medicareNum'] . "\t" . " First Name = " . $row['firstName'] . "\t" . " Last Name = " . $row['lastName'] . "\t" . " Date Of Birth = " . $row['dateOfBirth'] . 
+      "\t" . " Phone Number = " . $row['phoneNum'] . "\t" . " Address = " . $row['address']  . "\t" . " Province = " . $row['province'].  "\t" . " Citizenship = " . $row['citizenship']
+      . "\t" . " Email = " . $row['email']); // writing into a file 
 
       $motherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['motherMedicareNum'] . "'");
       $FatherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['fatherMedicareNum'] . "'");
@@ -347,27 +387,31 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
       $row2 = $motherName->fetch_assoc();
       $row3 = $FatherName->fetch_assoc();
 
-      // if both mother and father are available 
       if(isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n");
-       
-        // if mother is available but father isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n"); // writing into a file 
+
       }elseif(isset($row2) && !isset($row3)){
 
         echo nl2br("\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A\n\n");
-        
-        // if father is available but mother isnt 
+        fwrite($myfile,"\nMother's Name = " . $row2['firstName'] . " " . $row2['lastName'] . "\nFather's Name = N/A\n\n"); // writing into a file 
+
       }elseif(!isset($row2) && isset($row3)){
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n");
-        
-        // if neither mother nor father are available 
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName'] . "\n\n"); // writing into a file 
+
       }else{
 
         echo nl2br("\nMother's Name = N/A " . "\nFather's Name = N/A\n\n");
-        
+        fwrite($myfile,"\nMother's Name = N/A " . "\nFather's Name = N/A\n\n"); // writing into a file 
+
       }
+
+      echo nl2br("\tList of all employees who worked past 14 days with them: \n");
+      fwrite($myfile , "\tList of all employees who worked past 14 days with them: \n");
+
 
       $HealthWorkerDateOfPerform = $mysqli->query("SELECT dateOfPerform FROM Diagnostic WHERE
       patientMedicareNum = '". $row['medicareNum'] ."' AND dateOfResult = '". $specificdate ."'");
@@ -393,26 +437,27 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
             $row5 = $employessWorkedWith->fetch_assoc();
             $x = $k + 1;
             
-            // prints out all the employess that workerd with the infected health worker in the past 14 days 
             echo nl2br("Medicare Num $x= " . $row5['medicareNum'] . "\t" . " First Name = " . $row5['firstName'] . "\t" . " Last Name = " . $row5['lastName'] . "\t" . " Date Of Birth = " . $row5['dateOfBirth'] . 
             "\t" . " Phone Number = " . $row5['phoneNum'] . "\t" . " Address = " . $row5['address']  . "\t" . " Province = " . $row5['province'].  "\t" . " Citizenship = " . $row5['citizenship']
             . "\t" . " Email = " . $row5['email']); // writing into the webpage 
-
+            fwrite($myfile,"Medicare Num $x= " . $row5['medicareNum'] . "\t" . " First Name = " . $row5['firstName'] . "\t" . " Last Name = " . $row5['lastName'] . "\t" . " Date Of Birth = " . $row5['dateOfBirth'] . 
+            "\t" . " Phone Number = " . $row5['phoneNum'] . "\t" . " Address = " . $row5['address']  . "\t" . " Province = " . $row5['province'].  "\t" . " Citizenship = " . $row5['citizenship']
+            . "\t" . " Email = " . $row5['email']); // writing into a file 
             
         }
       }else{
-  
-        // no employees worked with the infected health worker 
+
         echo("0 Employee Cases \n");
+        fwrite($myfile, "0 Employee Cases\n");
 
       }
     }
 
   }else{
   
-    // no infected health workers 
-    echo("0 Infected Health workers  ");
-
+    echo("0 Postive Cases ");
+    fwrite($myfile, "0 Postive Cases");
+    fclose($myfile); //file close  
   }
 }
 
@@ -422,6 +467,10 @@ function listOfHealthWorkersTestedPositive($mysqli, $specificdate , $specificFac
 function regionReport($mysqli, $specificStartDate, $specificEndDate){
 
   $regionName = $mysqli->query("SELECT DISTINCT region from CityRegion");
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nA report about every region: \n");
+  fwrite($myfile , "\n\nA report about every region:: \n");
   
   // Looping through every region 
   if($regionName->num_rows > 0){
@@ -431,8 +480,11 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
       $row = $regionName->fetch_assoc();
       $x = $i + 1;
       
-      // prints out the region 
       echo nl2br("Region Name $x= " . $row['region'] . "\n"); // writing into the webpage 
+      fwrite($myfile,"Region Name $x= " . $row['region'] . "\n"); // writing into a file 
+
+
+    // TODO: FIX THE PART BELOW TO ONLY GET THE LATEST VALUE OF THE TEST ( order table based on time and get the desc and limit to 1)
 
       $numberOfCases = $mysqli->query("SELECT  DISTINCT patientMedicareNum FROM Diagnostic d2 
         WHERE patientMedicareNum IN(
@@ -469,17 +521,17 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
 
             }
 
-        // prints out the number of postive cases 
+        
         echo nl2br("Number of positive Cases in this region: " . $positiveCases ."\n"); // writing into the webpage 
-
-        // prints out the number of negative cases 
+        fwrite($myfile,"Number of positive Cases in this region: " . $positiveCases ."\n"); // writing into a file 
         echo nl2br("Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into the webpage 
-       
+        fwrite($myfile,"Number of negative Cases in this region: " . $negativeCases ."\n"); // writing into a file 
+
         }else{
 
-            // no cases were available in this region 
             echo("0 number of cases  ");
-           
+            fwrite($myfile, "0 number of cases ");
+
         }
 
         $historyOfAlerts = $mysqli->query("SELECT * FROM AlertHistory ah  WHERE region = '". $row['region'] ."' 
@@ -493,17 +545,18 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
               $row4 = $historyOfAlerts->fetch_assoc();
               $x = $p + 1;
 
-              // prints out the alert history info 
              echo nl2br("ID = " . $row4['id'] . "\t" . "Level = " . $row4['level'] . "\t" . 
             "Alert Date and Time = " . $row4['alertDateTime'] . "\t" . "\n"); // writing into the webpage 
-            
+             fwrite($myfile,"ID = " . $row4['id'] . "\t" . "Level = " . $row4['level'] . "\t" . 
+             "Alert Date and Time = " . $row4['alertDateTime'] . "\t" . "\n"); // writing into a file 
+
           }
 
         }else{
 
-          // no alert history was found in that specific date 
           echo("0 Alert History Results ");
-          
+          fwrite($myfile, "0 Alert History Results ");
+
         }
 
 
@@ -511,9 +564,9 @@ function regionReport($mysqli, $specificStartDate, $specificEndDate){
 
   }else{
   
-    // if no region was found 
-    echo("0 Regions found  ");
- 
+    echo("0 Results ");
+    fwrite($myfile, "0 Results ");
+    fclose($myfile); //file close  
   }
 }
 
@@ -525,7 +578,11 @@ function allMessagesGenerated($mysqli, $specificStartDate, $specificEndDate){
   $messagesGenerated  = $mysqli->query("SELECT * FROM Messages m
   WHERE messageDateTime >= '". $specificStartDate ."' AND 
   messageDateTime <= '". $specificEndDate ."'");
- 
+  $myfile = fopen("Testing.txt", "a") or die("Unable to open file !"); // file open 
+  
+  echo nl2br("\n\nAll the messages generated by the system : \n");
+  fwrite($myfile , "\n\nAll the messages generated by the system: \n");
+  
   // Looping through every region 
   if($messagesGenerated->num_rows > 0){
   
@@ -535,78 +592,83 @@ function allMessagesGenerated($mysqli, $specificStartDate, $specificEndDate){
       $x = $i + 1;
       
 
-      // if guideline , description and recommendation were found ( 0 0 0)
       if(isset($row['guideline']) && isset($row['description']) && isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
         "Guideline = " . $row['guideline'] . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into the webpage 
-       
-        // if guideline and description were found , but recommendation wasnt ( 0 0 1)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
+        "Guideline = " . $row['guideline'] . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into a file 
+
       }elseif(isset($row['guideline']) && isset($row['description']) && !isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
         "Guideline = " . $row['guideline'] . "\t". "Recommendation = N/A" . "\n"); // writing into the webpage 
-        
-        // ( 0 1 0)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
+        "Guideline = " . $row['guideline'] . "\t". "Recommendation = N/A" . "\n"); // writing into a file 
+
       }elseif(isset($row['guideline']) && !isset($row['description']) && isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
         "Guideline = " . $row['guideline'] . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into the webpage 
-        
-        //  ( 0 1 1)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
+        "Guideline = " . $row['guideline'] . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into a file 
+
       }elseif(isset($row['guideline']) && !isset($row['description']) && !isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
         "Guideline = " . $row['guideline'] . "\t". "Recommendation = N/A"."\n"); // writing into the webpage 
-        
-        //  ( 1 0 0 )
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
+        "Guideline = " . $row['guideline'] . "\t". "Recommendation = N/A"."\n"); // writing into a file 
+
       }elseif(!isset($row['guideline']) && isset($row['description']) && isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
         "Guideline = N/A" . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into the webpage 
-        
-        //  ( 1 0 1)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
+        "Guideline = N/A" . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into a file 
+
       }elseif(!isset($row['guideline']) && isset($row['description']) && !isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
         "Guideline = N/A" . "\t". "Recommendation = N/A"."\n"); // writing into the webpage 
-        
-        //  ( 1 1 0)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= " . $row['description'] . "\t" .
+        "Guideline = N/A" . "\t". "Recommendation = N/A"."\n"); // writing into a file 
+
       }elseif(!isset($row['guideline']) && !isset($row['description']) && isset($row['recommendation'])){
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
         "Guideline = N/A" . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into the webpage 
-        
-        // ( 1 1 1)
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
+        "Guideline = N/A" . "\t". "Recommendation = " . $row['recommendation']."\n"); // writing into a file 
+
       }else{
 
         echo nl2br("Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
         "Guideline = N/A" . "\t". "Recommendation = N/A"."\n"); // writing into the webpage 
-       
+        fwrite($myfile,"Message Date Time $x= " . $row['messageDateTime'] . "\t" . "Description= N/A" . "\t" .
+        "Guideline = N/A" . "\t". "Recommendation = N/A"."\n"); // writing into a file 
+
       }
     }
 
   }else{
   
-    // no mesages were found 
-    echo("0 messages were generated  ");
-    
+    echo("0 Results ");
+    fwrite($myfile, "0 Results ");
+    fclose($myfile); //file close  
   }
 }
 
 
 
 
-// Testing each function withe proper inputs 
-// Each comment beside each function represents the type of info it needs 
 
-
-listOfAllFacilites($mysqli);  // connection variable 
-listOfAllRegions($mysqli); // connection variable 
-allPeopleInSpecificAddress($mysqli, '3, 3rd avenue'); // connection variable , specificAddress
-listOfPoepleOnSpecificDate($mysqli, '2021-01-11 00:00:00'); // connection variable , specificDate 
-listOfHealthWorkersInSpecificFacility($mysqli, 'Viau Public Health Center'); // connection variable . specificFacility 
-listOfHealthWorkersTestedPositive($mysqli, '2021-04-15 22:50:54' ,'Viau Public Health Center'); // connection variable , specificDate , specificFacility
-regionReport($mysqli, '2021-04-12 23:24:18', '2021-04-12 23:30:23' ); // connection variable , startDate, endDate
-allMessagesGenerated($mysqli, '2021-04-15 22:50:35', '2021-04-15 22:53:16' ); // connection variable , startDate, endDate
+listOfAllFacilites($mysqli);
+listOfAllRegions($mysqli);
+allPeopleInSpecificAddress($mysqli, '3, 3rd avenue');
+listOfPoepleOnSpecificDate($mysqli, '2021-01-11 00:00:00');
+listOfHealthWorkersInSpecificFacility($mysqli, 'Viau Public Health Center');
+listOfHealthWorkersTestedPositive($mysqli, '2021-04-15 22:50:54' ,'Viau Public Health Center');
+regionReport($mysqli, '2021-04-12 23:24:18', '2021-04-12 23:30:23' );
+allMessagesGenerated($mysqli, '2021-04-15 22:50:35', '2021-04-15 22:53:16' );
 
