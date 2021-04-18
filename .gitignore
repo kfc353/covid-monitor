@@ -5,7 +5,6 @@
 .vscode
 
 # local packages
-vendor
 php.ini
 
 
