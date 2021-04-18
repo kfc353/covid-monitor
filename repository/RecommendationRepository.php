@@ -13,7 +13,7 @@ class RecommendationRepository
         if ($stmt->affected_rows == 0){
             throw new Exception("No row updated in Recommendation");
         } else if ($stmt->affected_rows == -1){
-            throw new Exception(sprintf("Error occurred when update Recommendation"));
+            throw new Exception(sprintf("Error occurred when update Recommendation: %s\n", $stmt->error));
         }
     }
 }

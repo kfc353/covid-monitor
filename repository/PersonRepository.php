@@ -35,7 +35,6 @@ class PersonRepository
         if ($stmt->affected_rows == 0) {
             throw new Exception("No row affected when inserting into Person. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            sprintf("Error occurred when inserting into Person: %s\n", $stmt->error);
             throw new Exception(sprintf("Error occurred when inserting into Person: %s\n", $stmt->error));
         }
         $stmt->close();
