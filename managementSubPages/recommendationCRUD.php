@@ -1,11 +1,11 @@
 <?php require_once "repository/RecommendationRepository.php";
-if(isset($_POST['regionNameCreate'])){
-    RegionRepository::save($_POST['regionNameCreate']);
+if(isset($_POST['recommendationCreateText'])){
+    RegionRepository::save($_POST['recommendationCreateText']);
 } elseif(isset($_POST['recommendationIDRemove'])){
     $recommendationIDRemove = $_POST['recommendationIDRemove'];
-    RecommendationRepository::deleteByRecommendationId($recommendationId);
+    RecommendationRepository::deleteByRecommendationId($recommendationIDRemove);
 
-} elseif(isset($_POST['regionNameUpdate'])){
+} elseif(isset($_POST['recommendationIDUpdate'])){
     $oldRegionName = $_POST['regionNameUpdate'];
     $newRegionName = $_POST['newRegionName'];
     RegionRepository::update($oldRegionName, $newRegionName);
@@ -40,7 +40,7 @@ if(isset($_POST['regionNameCreate'])){
 
     <div id='recommendationRemove' style='display: none;'>
         <form action='' method="post" id="recommendationRemoveForm">
-            <p style='text-align: center; color: red;'>Enter the recommendation # you wish to remove</h3>
+            <p style='text-align: center; color: red;'>Enter the recommendation # you wish to remove</p>
 
             <div class='adminSearchForm'>
                 <div class='formRow'>
@@ -67,7 +67,7 @@ if(isset($_POST['regionNameCreate'])){
     </div>
     <div id='recommendationUpdate' style='display: none;'>
         <form action='' method="post" id="recommendationUpdateForm">
-            <p style='text-align: center; color: red;'>Enter the recommendation # you wish to update</h3>
+            <p style='text-align: center; color: red;'>Enter the recommendation # you wish to update</p>
 
             <div class='adminSearchForm'>
                 <div class='formRow'>

@@ -24,7 +24,6 @@ class MysqlConnection
     private function connectMysql()
     {
         $osInfo = self::getOSInfo();
-        echo print_r($osInfo);
         if ($osInfo == null) {
             $host = "127.0.0.1:3307";
         } else {
