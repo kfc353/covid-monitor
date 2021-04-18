@@ -12,8 +12,8 @@ class HealthFacilityRepository
         $name = $facility->getName();
         $address = $facility->getAddress();
         $webAddress = $facility->getWebAddress();
-        $type = $facility->getType()->getValue();
-        $acceptMethod = $facility->getAcceptMethod()->getValue();
+        $type = $facility->getType();
+        $acceptMethod = $facility->getAcceptMethod();
         $stmt->bind_param("sssss",
             $name, $address, $webAddress, $type, $acceptMethod);
         $stmt->execute();
@@ -75,12 +75,12 @@ class HealthFacilityRepository
     static function deleteByNameAddress($name, $address): void
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
-        $stmt = $mysqli->prepare("DELETE FROM HealthFacility WHERE name = ? AND address = ?");
+        $stmt = $mysqli->prepare("DELETE FROM HealthFacility WHERE name = (?) AND address = (?)");
         $stmt->bind_param("ss", $name, $address);
         $stmt->execute();
         if ($stmt->affected_rows == 0){
             throw new Exception("No row deleted in HealthFacility");
-        } else {
+        } else if($stmt -> affected_rows == -1) {
             throw new Exception(sprintf("Error occurred when delete HealthFacility: %s\n", $stmt->error));
         }
         $stmt->close();

@@ -24,11 +24,13 @@ function createEntry() {
             console.log("region");
             break;
         case "groupZone":
-            var groupZoneTable = document.getElementById("groupZoneTable");
-            groupZoneTable.style.display = 'block';
+            var groupZoneCreate = document.getElementById("groupZoneCreate");
+            groupZoneCreate.style.display = 'block';
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
+            var recommendationCRUD = document.getElementById("recommendationCreate");
+            recommendationCRUD.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
@@ -40,7 +42,7 @@ function createEntry() {
     }
 }
 
-// deletes selected entries
+// removes selected entries
 function removeEntry() {
     hideAllOperations();
     var selectedOption = document.getElementById("managementSelect").value;
@@ -66,11 +68,13 @@ function removeEntry() {
             console.log("region");
             break;
         case "groupZone":
-            var groupZoneTable = document.getElementById("groupZoneTable");
-            groupZoneTable.style.display = 'block';
+            var groupZoneRemove = document.getElementById("groupZoneRemove");
+            groupZoneRemove.style.display = 'block';
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
+            var recommendationRemove = document.getElementById("recommendationRemove");
+            recommendationRemove.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
@@ -110,11 +114,13 @@ function updateEntry() {
             console.log("region");
             break;
         case "groupZone":
-            var groupZoneTable = document.getElementById("groupZoneTable");
-            groupZoneTable.style.display = 'block';
+            var groupZoneUpdate = document.getElementById("groupZoneUpdate");
+            groupZoneUpdate.style.display = 'block';
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
+            var recommendationUpdate = document.getElementById("recommendationUpdate");
+            recommendationUpdate.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
@@ -153,11 +159,13 @@ function displayManagementPage() {
             console.log("region");
             break;
         case "groupZone":
-            var groupZoneTable = document.getElementById("groupZoneTable");
-            groupZoneTable.style.display = 'block';
+            var groupZoneCRUD = document.getElementById("groupZoneCRUD");
+            groupZoneCRUD.style.display = 'block';
             console.log("groupZone");
             break;
         case "pubHealthRecommend":
+            var recommendationCRUD = document.getElementById("recommendationCRUD");
+            recommendationCRUD.style.display = 'block';
             console.log("pubHealthRecommend");
             break;
         case "address":
@@ -215,7 +223,8 @@ function hideAllManagement() {
     document.getElementById("healthWorkerCRUD").style.display = 'none';
     document.getElementById("facilityCRUD").style.display = 'none';
     document.getElementById("regionCRUD").style.display = 'none';
-    document.getElementById("groupZoneTable").style.display = 'none';
+    document.getElementById("groupZoneCRUD").style.display = 'none';
+    document.getElementById("recommendationCRUD").style.display = 'none';
 }
 
 function hideAllDbSearches() {
@@ -242,6 +251,12 @@ function hideAllOperations(){
     document.getElementById("regionCreate").style.display = 'none';
     document.getElementById("regionRemove").style.display = 'none';
     document.getElementById("regionUpdate").style.display = 'none';
+    document.getElementById("recommendationCreate").style.display = 'none';
+    document.getElementById("recommendationRemove").style.display = 'none';
+    document.getElementById("recommendationUpdate").style.display = 'none';
+    document.getElementById("groupZoneCreate").style.display = 'none';
+    document.getElementById("groupZoneRemove").style.display = 'none';
+    document.getElementById("groupZoneUpdate").style.display = 'none';
 }
 
 function getFromDate() {

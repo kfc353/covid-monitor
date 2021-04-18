@@ -12,7 +12,7 @@
 
     <h2>Diagnostic Updates</h2>
 
-    <form action="Diagnostic.php" method="POST"> 
+    <form action="Diagnostic.php" method="post"> 
     <h2>Required info</h2>
 
       Person Medicare Number: <input type="text" name="personMedicareNum"> <br>

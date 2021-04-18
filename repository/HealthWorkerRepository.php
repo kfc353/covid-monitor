@@ -85,10 +85,11 @@ class HealthWorkerRepository
         }
     }
 
-    static function updateByMedicareNum($medicareNum, HealthWorker $worker): void
+    static function updateByMedicareNum($healthWorker): void
     {
+        printf("in health worker");
         // mysql integrity on update rule will update HealthWorker table
-        PersonRepository::updateByMedicareNum($medicareNum, $worker);
+        PersonRepository::updateByMedicareNum($healthWorker);
     }
 
     static function deleteByMedicareNum($medicareNum): void{

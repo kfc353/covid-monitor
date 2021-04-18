@@ -7,7 +7,7 @@ class GroupZoneRepository
     static function save(GroupZone $groupZone): void
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
-        $stmt = $mysqli->prepare("INSERT INTO GroupZone VALUES ?");
+        $stmt = $mysqli->prepare("INSERT INTO GroupZone VALUES (?)");
         $groupZoneId = $groupZone->getGroupZoneId();
         $stmt->bind_param("s", $groupZoneId);
         $stmt->execute();
@@ -57,5 +57,18 @@ class GroupZoneRepository
            throw new Exception(sprintf("Error occurred when delete GroupZone: %s\n", $stmt->error));
         }
         $stmt->close();
+    }
+
+    static function update($oldGroupZoneId, $newGroupZoneId): void
+    {
+        $mysqli = MysqlConnection::getInstance()->getMysqli();
+        $stmt = $mysqli->prepare("UPDATE GroupZone SET groupZoneID = ? WHERE groupZoneID = ?");
+        $stmt->bind_param("ss", $newGroupZoneId, $oldGroupZoneId);
+        $stmt->execute();
+        if ($stmt->affected_rows == 0) {
+            throw new Exception("No row updated in Region. \n");
+        } else if ($stmt->affected_rows == -1) {
+            throw new Exception(sprintf("Error occurred when update Region: %s\n", $stmt->error));
+        }
     }
 }

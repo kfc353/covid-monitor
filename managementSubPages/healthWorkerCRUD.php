@@ -1,111 +1,142 @@
 <?php include './repository/HealthWorkerRepository.php' ?>
 <?php
+if (isset($_POST['medicareNumCreate'])) {
+    $array['medicareNum'] = $_POST['medicareNumCreate'];
+    $array['firstName'] = $_POST['firstNameCreate'];
+    $array['lastName'] = $_POST['lastNameCreate'];
+    $array['dateOfBirth'] = $_POST['dateOfBirthCreate'];
+    $array['phoneNumber'] = $_POST['phoneNumberCreate'];
+    $array['address'] = $_POST['addressCreate'];
+    $array['province'] = $_POST['provinceCreate'];
+    $array['citizenship'] = $_POST['citizenshipCreate'];
+    $array['email'] = $_POST['emailCreate'];
+    if (!($_POST['motherMedicareNumCreate'] == null)) {
+        $array['motherMedicareNum'] = $_POST['motherMedicareNumCreate'];
+    }
+    if (!($_POST['fatherMedicareNumCreate'] == null)) {
+        $array['fatherMedicareNum'] = $_POST['fatherMedicareNumCreate'];
+    }
 
-//$allWorkersArray = HealthWorkerRepository::findAll();
-/*echo "<table>";
-foreach ($allWorkersArray as $aWorker) {
-    echo "<tr>";
-    $medicare = $aWorker->getMedicareNum();
-    echo "<td>$medicare</td>";
-    $firstName = $aWorker->getFirstName();
-    echo "<td>$firstName</td>";
-    $lastName = $aWorker->getLastName();
-    echo "<td>$lastName</td>";
-    echo "</tr>";
+
+    $createdHealthWorker = new HealthWorker($array);
+    HealthWorkerRepository::save($createdHealthWorker);
+} elseif (isset($_POST['medicareNumRemove'])) {
+    $medicareNum = $_POST['medicareNumRemove'];
+    HealthWorkerRepository::deleteByMedicareNum($medicareNum);
+} elseif (isset($_POST['medicareNumUpdate'])) {
+    $array['medicareNum'] = $_POST['medicareNumUpdate'];
+    $array['firstName'] = $_POST['firstNameUpdate'];
+    $array['lastName'] = $_POST['lastNameUpdate'];
+    $array['dateOfBirth'] = $_POST['dateOfBirthUpdate'];
+    $array['phoneNumber'] = $_POST['phoneNumberUpdate'];
+    $array['address'] = $_POST['addressUpdate'];
+    $array['province'] = $_POST['provinceUpdate'];
+    $array['citizenship'] = $_POST['citizenshipUpdate'];
+    $array['email'] = $_POST['emailUpdate'];
+    if (!($_POST['motherMedicareNumUpdate'] == null)) {
+        $array['motherMedicareNum'] = $_POST['motherMedicareNumUpdate'];
+    }
+    if (!($_POST['fatherMedicareNumUpdate'] == null)) {
+        $array['fatherMedicareNum'] = $_POST['fatherMedicareNumUpdate'];
+    }
+    $updatedHealthWorker = new HealthWorker($array);
+    HealthWorkerRepository::updateByMedicareNum($updatedHealthWorker);
 }
-echo "</table>";*/ ?>
+
+?>
+
+
 <div id='healthWorkerCRUD' style='display: none'>
-
     <div id='healthWorkerCreate' style='display: none'>
-        <form action='' method='POST'>
+        <form action='' method='post' id='healthWorkerCreateForm'>
             <div class='adminSearchForm'>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='medicareNum'>Medicare Number</label>
+                        <label for='medicareNumCreate'>Medicare Number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='medicareNum' name='medicareNum' placeholder='AAAA 0000 0000 0000'>
+                        <input type='text' id='medicareNumCreate' name='medicareNumCreate' placeholder='AAAA00000000' required pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='firstName'>First Name</label>
+                        <label for='firstNameCreate'>First Name</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='firstName' name='firstName'>
+                        <input type='text' id='firstNameCreate' name='firstNameCreate' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='lastName'>Last Name</label>
+                        <label for='lastNameCreate'>Last Name</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='lastName' name='lastName'>
+                        <input type='text' id='lastNameCreate' name='lastNameCreate' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='dateOfBirth'>Date of Birth</label>
+                        <label for='dateOfBirthCreate'>Date of Birth</label>
 
                     </div>
                     <div class='formRightCol'>
-                        <input type='date' id='dateOfBirth' name='dateOfBirth'>
+                        <input type='date' id='dateOfBirthCreate' name='dateOfBirthCreate' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='phoneNumber'>Phone Number</label>
+                        <label for='phoneNumberCreate'>Phone Number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='phoneNumber' name='phoneNumber' placeholder='1-(123)123-1234'>
+                        <input type='text' id='phoneNumberCreate' name='phoneNumberCreate' placeholder='1-(123)123-1234' required pattern="^[0-9]{1,3}\-\([0-9]{3}\)[0-9]{3}\-[0-9]{4}$">
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='address'>Address</label>
+                        <label for='addressCreate'>Address</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='address' name='address' placeholder='(ex. 123, 4th avenue)'>
+                        <input type='text' id='addressCreate' name='addressCreate' placeholder='(ex. 123, 4th avenue)' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='province'>Province</label>
+                        <label for='provinceCreate'>Province</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='province' name='province'>
+                        <input type='text' id='provinceCreate' name='provinceCreate' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='citizenship'>Citizenship</label>
+                        <label for='citizenshipCreate'>Citizenship</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='citizenship' name='citizenship' placeholder='ex. Canadian'>
+                        <input type='text' id='citizenshipCreate' name='citizenshipCreate' placeholder='ex. Canadian' required>
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='email'>Email address</label>
+                        <label for='emailCreate'>Email address</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='email' name='email' placeholder='ex. youremail@email.com'>
+                        <input type='text' id='emailCreate' name='emailCreate' placeholder='ex. youremail@email.com' required pattern="^\w{1,}@\w{1,}\.\w{1,}$">
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='motherMedicareNum'>Mother's medicare number</label>
+                        <label for='motherMedicareNumCreate'>Mother's medicare number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='motherMedicareNum' name='motherMedicareNum'>
+                        <input type='text' id='motherMedicareNumCreate' name='motherMedicareNumCreate' placeholder='AAAA00000000' pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='fatherMedicareNum'>Father's medicare number</label>
+                        <label for='fatherMedicareNumCreate'>Father's medicare number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='fatherMedicareNum' name='fatherMedicareNum'>
+                        <input type='text' id='fatherMedicareNumCreate' name='fatherMedicareNumCreate' placeholder='AAAA00000000' pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
 
@@ -115,7 +146,7 @@ echo "</table>";*/ ?>
 
                     <div class='formRightCol'>
 
-                        <input type='submit' value='Create'>
+                        <button form='healthWorkerCreateForm'>Create</button>
                     </div>
 
                 </div>
@@ -124,9 +155,10 @@ echo "</table>";*/ ?>
 
         </form>
     </div>
+
     <div id='healthWorkerRemove' style='display: none;'>
-        <form action=''>
-            <p style='text-align: center; color: red;'>Enter the medicare number of the health care worker you wish to remove</h3>
+        <form action='' method="post" id="healthWorkerRemoveForm">
+            <p style='text-align: center; color: red;'>Enter the medicare number of the health worker you wish to remove</p>
 
             <div class='adminSearchForm'>
                 <div class='formRow'>
@@ -134,7 +166,7 @@ echo "</table>";*/ ?>
                         <label for='medicareNumRemove'>Medicare Number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='medicareNumRemove' name='medicareNumRemove' placeholder='AAAA 0000 0000 0000'>
+                        <input type='text' id='medicareNumRemove' name='medicareNumRemove' placeholder='AAAA00000000' required pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
                 <div class='formRow'>
@@ -142,8 +174,8 @@ echo "</table>";*/ ?>
                     </div>
 
                     <div class='formRightCol'>
+                        <button form='healthWorkerRemoveForm'>Remove</button>
 
-                        <input type='submit' value='Remove'>
                     </div>
 
                 </div>
@@ -151,29 +183,113 @@ echo "</table>";*/ ?>
 
         </form>
     </div>
-    <div id='healthWorkerUpdate' style='display: none;'>
-        <form action=''>
-            <p style='text-align: center; color: red;'>Enter the medicare number of the health care worker you wish to update</h3>
+
+    <div id='healthWorkerUpdate' style='display: none'>
+        <form action='' method='post' id='healthWorkerUpdateForm'>
+        <p style='text-align: center; color: red;'>Enter the medicare number of the health worker you wish to update</p>
 
             <div class='adminSearchForm'>
                 <div class='formRow'>
                     <div class='formLeftCol'>
-                        <label for='medicareNumRemove'>Medicare Number</label>
+                        <label for='medicareNumUpdate'>Medicare Number</label>
                     </div>
                     <div class='formRightCol'>
-                        <input type='text' id='medicareNumUpdate' name='medicareNumUpdate' placeholder='AAAA 0000 0000 0000'>
+                        <input type='text' id='medicareNumUpdate' name='medicareNumUpdate' placeholder='AAAA00000000' required pattern="[A-Z]{4}[0-9]{8}">
                     </div>
                 </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='firstNameUpdate'>First Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='firstNameUpdate' name='firstNameUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='lastNameUpdate'>Last Name</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='lastNameUpdate' name='lastNameUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='dateOfBirthUpdate'>Date of Birth</label>
+
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='date' id='dateOfBirthUpdate' name='dateOfBirthUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='phoneNumberUpdate'>Phone Number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='phoneNumberUpdate' name='phoneNumberUpdate' placeholder='1-(123)123-1234' required pattern="^[0-9]{1,3}\-\([0-9]{3}\)[0-9]{3}\-[0-9]{4}$">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='addressUpdate'>Address</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='addressUpdate' name='addressUpdate' placeholder='(ex. 123, 4th avenue)' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='provinceUpdate'>Province</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='provinceUpdate' name='provinceUpdate' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='citizenshipUpdate'>Citizenship</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='citizenshipUpdate' name='citizenshipUpdate' placeholder='ex. Canadian' required>
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='emailUpdate'>Email address</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='emailUpdate' name='emailUpdate' placeholder='ex. youremail@email.com' required pattern="^\w{1,}@\w{1,}\.\w{1,}$">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='motherMedicareNumUpdate'>Mother's medicare number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='motherMedicareNumUpdate' name='motherMedicareNumUpdate' placeholder='AAAA00000000' pattern="[A-Z]{4}[0-9]{8}">
+                    </div>
+                </div>
+                <div class='formRow'>
+                    <div class='formLeftCol'>
+                        <label for='fatherMedicareNumUpdate'>Father's medicare number</label>
+                    </div>
+                    <div class='formRightCol'>
+                        <input type='text' id='fatherMedicareNumUpdate' name='fatherMedicareNumUpdate' placeholder='AAAA00000000' pattern="[A-Z]{4}[0-9]{8}">
+                    </div>
+                </div>
+
                 <div class='formRow'>
                     <div class='formLeftCol'>
                     </div>
 
                     <div class='formRightCol'>
 
-                        <input type='submit' value='Find'>
+                        <button form='healthWorkerUpdateForm'>Update</button>
                     </div>
 
                 </div>
+
             </div>
 
         </form>

@@ -14,13 +14,16 @@ class Person
     protected string $motherMedicareNum;
     protected string $fatherMedicareNum;
 
-    public function __construct(array $assocArray){
+    public function __construct(array $assocArray)
+    {
         $this->setMedicareNum($assocArray['medicareNum']);
         $this->setFirstName($assocArray['firstName']);
         $this->setLastName($assocArray['lastName']);
         $this->setDateOfBirth($assocArray['dateOfBirth']);
+        $this->setPhoneNum($assocArray['phoneNum']);
         $this->setAddress($assocArray['address']);
         $this->setProvince($assocArray['province']);
+        $this->setPhoneNum($assocArray['phoneNumber']);
         $this->setCitizenship($assocArray['citizenship']);
         $this->setEmail($assocArray['email']);
         if (isset($assocArray['motherMedicareNum'])) {
@@ -194,17 +197,24 @@ class Person
     /**
      * @return string
      */
-    public function getMotherMedicareNum(): string
+    public function getMotherMedicareNum(): ?string
     {
-        return $this->motherMedicareNum;
+        if(!isset($this->motherMedicareNum)){
+            return null;
+        } else {
+            return $this->motherMedicareNum;
+        }
     }
 
     /**
      * @return string
      */
-    public function getFatherMedicareNum(): string
+    public function getFatherMedicareNum(): ?string
     {
-        return $this->fatherMedicareNum;
+        if(!isset($this->fatherMedicareNum)){
+            return null;
+        } else {
+            return $this->fatherMedicareNum;
+        }
     }
-
 }

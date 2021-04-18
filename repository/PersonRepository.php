@@ -8,6 +8,7 @@ class PersonRepository
     {
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         $stmt = $mysqli->prepare("INSERT INTO Person VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+        $medicareNum = $person->getMedicareNum();
         $firstName = $person->getFirstName();
         $lastName = $person->getLastName();
         $dateOfBirth = $person->getDateOfBirth();
@@ -18,8 +19,8 @@ class PersonRepository
         $email = $person->getEmail();
         $motherMedicareNum = $person->getMotherMedicareNum();
         $fatherMedicareNum = $person->getFatherMedicareNum();
-        $stmt->bind_param(
-            "sssssssssss",
+        $stmt->bind_param("sssssssssss",
+            $medicareNum,
             $firstName,
             $lastName,
             $dateOfBirth,
@@ -35,7 +36,6 @@ class PersonRepository
         if ($stmt->affected_rows == 0) {
             throw new Exception("No row affected when inserting into Person. Entry already exists.\n");
         } else if ($stmt->affected_rows == -1) {
-            sprintf("Error occurred when inserting into Person: %s\n", $stmt->error);
             throw new Exception(sprintf("Error occurred when inserting into Person: %s\n", $stmt->error));
         }
         $stmt->close();
@@ -108,6 +108,7 @@ class PersonRepository
             $fatherMedicareNum,
             $medicareNum
         );
+        printf("in person");
         $stmt->execute();
         if ($stmt->affected_rows == 0) {
             throw new Exception("No row updated in Person. \n");

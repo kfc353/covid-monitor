@@ -24,10 +24,10 @@ class MysqlConnection
     private function connectMysql()
     {
         $osInfo = self::getOSInfo();
-        if($osInfo == null){
+        if ($osInfo == null) {
             $host = "127.0.0.1:3307";
-        } else{
-            $osInfo["name"] == "Scientific Linux" ? "kfc353.encs.concordia.ca" : "127.0.0.1:3307";
+        } else {
+            $host = $osInfo["name"] == "Scientific Linux" ? "kfc353.encs.concordia.ca" : "127.0.0.1:3307";
         }
         $database = "kfc353_4";
         $username = "kfc353_4";

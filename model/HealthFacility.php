@@ -1,19 +1,18 @@
 <?php
-
 class HealthFacility
 {
     private string $name;
     private string $address;
     private string $webAddress;
-    private FacilityType $type;
-    private AcceptMethod $acceptMethod;
+    private string $type;
+    private string $acceptMethod;
 
     public function __construct($assocArray){
         $this->setName($assocArray['name']);
         $this->setAddress($assocArray['address']);
         $this->setWebAddress($assocArray['webAddress']);
-        $this->setType(FacilityType::from($assocArray['type']));
-        $this->setAcceptMethod(AcceptMethod::from($assocArray['acceptMethod']));
+        $this->setType(($assocArray['type']));
+        $this->setAcceptMethod(($assocArray['acceptMethod']));
     }
 
     /**
@@ -70,33 +69,33 @@ class HealthFacility
     }
 
     /**
-     * @return FacilityType
+     * @return string
      */
-    public function getType(): FacilityType
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @param FacilityType $type
+     * 
      */
-    public function setType(FacilityType $type): void
+    public function setType($type): void
     {
         $this->type = $type;
     }
 
     /**
-     * @return AcceptMethod
+     * @return string
      */
-    public function getAcceptMethod(): AcceptMethod
+    public function getAcceptMethod(): string
     {
         return $this->acceptMethod;
     }
 
     /**
-     * @param AcceptMethod $acceptMethod
+     * @param string $acceptMethod
      */
-    public function setAcceptMethod(AcceptMethod $acceptMethod): void
+    public function setAcceptMethod(string $acceptMethod): void
     {
         $this->acceptMethod = $acceptMethod;
     }

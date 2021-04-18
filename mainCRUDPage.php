@@ -19,7 +19,6 @@
         <option value="region">Region</option>
         <option value="groupZone">Group Zone</option>
         <option value="pubHealthRecommend">Public Health Recommendation</option>
-        <option value="address">Address-related tables</option>
     </select>
     <div id="buttonContainer">
         <button onClick=createEntry()>Create new entry</button>
@@ -31,10 +30,8 @@
     <?php include "managementSubPages/healthWorkerCRUD.php" ?>
     <?php include "managementSubPages/facilityCRUD.php" ?>
     <?php include "managementSubPages/regionCRUD.php" ?>
-    <?php include "managementSubPages/groupZoneTable.php" ?>
-    <?php include "managementSubPages/recommendationTable.php" ?>
-    <!--TODO: adressTable.php-->
-    <?php include "managementSubPages/addressTable.php" ?>
+    <?php include "managementSubPages/groupZoneCRUD.php" ?>
+    <?php include "managementSubPages/recommendationCRUD.php" ?>
 </fieldset>
 
 <fieldset id="dbSearchesFieldset">
@@ -73,6 +70,7 @@
         <option value="symptomProgress">Get Symptom Progress of a person</option>
         <option value="regionReport">Report for all regions</option>
         <option value="createTables">Create Message and Alert Table</option>
+        <?php include "alertsAndMessagesSubPages/DiagnosticForm.php"?>
     </select>
 </fieldset>
 
