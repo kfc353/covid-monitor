@@ -14,11 +14,13 @@ class Person
     protected string $motherMedicareNum;
     protected string $fatherMedicareNum;
 
-    public function __construct(array $assocArray){
+    public function __construct(array $assocArray)
+    {
         $this->setMedicareNum($assocArray['medicareNum']);
         $this->setFirstName($assocArray['firstName']);
         $this->setLastName($assocArray['lastName']);
         $this->setDateOfBirth($assocArray['dateOfBirth']);
+        $this->setPhoneNum($assocArray['phoneNum']);
         $this->setAddress($assocArray['address']);
         $this->setProvince($assocArray['province']);
         $this->setPhoneNum($assocArray['phoneNumber']);
@@ -215,5 +217,4 @@ class Person
             return $this->fatherMedicareNum;
         }
     }
-
 }
