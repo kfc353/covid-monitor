@@ -34,7 +34,7 @@ class MysqlConnection
         $password = "Al3xB3st";
 
         echo $host;
-        echo $osInfo;
+        echo "osInfo is " . $osInfo["name"];
 
         // create connection
         $this->connection = new mysqli($host, $username, $password, $database);
