@@ -33,8 +33,10 @@ class MysqlConnection
         $username = "kfc353_4";
         $password = "Al3xB3st";
 
+        echo $host;
+
         // create connection
-        $this->connection = new mysqli($host, $username, $password, $database);
+        $this->connection = new mysqli($host, $username, $password, $database, 3306);
     }
 
     private static function getOSInfo()
