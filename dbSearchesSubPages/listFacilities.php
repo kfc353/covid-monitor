@@ -1,15 +1,5 @@
 <?php
-
-
-// had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
-$host = "127.0.0.1:3307";
-$database = "kfc353_4";
-$username = "kfc353_4";
-$password = "Al3xB3st";
-
-// create connection
-$mysqli = new mysqli($host, $username, $password, $database);
-
+require_once "repository/MysqlConnection.php";
 
 // Lists all the facilities (Number 12 from project guideline)
 function listOfAllFacilites($mysqli)
@@ -82,5 +72,7 @@ function listOfAllFacilites($mysqli)
 }
 ?>
 <div id='listFacilities' style='display: none'>
-    <?php listOfAllFacilites($mysqli) ?>
+    <?php
+    $mysqli = MysqlConnection::getInstance()->getMysqli();
+    listOfAllFacilites($mysqli) ?>
 </div>

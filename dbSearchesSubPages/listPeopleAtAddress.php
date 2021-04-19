@@ -1,5 +1,5 @@
 <?php
-
+require_once "repository/MysqlConnection.php"; 
 // List of all people in a specific address (Number 11 from project guideline)
 function allPeopleInSpecificAddress($mysqli, $specificAddress)
 {
@@ -30,13 +30,13 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress)
             $x = $i + 1;
             echo "<tr>";
             // prints out the information of the person 
-            echo "<td>" .$row['medicareNum'] ."</td>";
-            echo "<td>" .$row['firstName'] ."</td>";
-            echo "<td>" .$row['lastName'] ."</td>";
-            echo "<td>" .$row['dateOfBirth'] ."</td>";
-            echo "<td>" .$row['phoneNum'] ."</td>";
-            echo "<td>" .$row['address'] ."</td>";
-            echo "<td>" .$row['citizenship'] ."</td>";
+            echo "<td>" . $row['medicareNum'] . "</td>";
+            echo "<td>" . $row['firstName'] . "</td>";
+            echo "<td>" . $row['lastName'] . "</td>";
+            echo "<td>" . $row['dateOfBirth'] . "</td>";
+            echo "<td>" . $row['phoneNum'] . "</td>";
+            echo "<td>" . $row['address'] . "</td>";
+            echo "<td>" . $row['citizenship'] . "</td>";
             $motherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['motherMedicareNum'] . "'");
             $FatherName = $mysqli->query("SELECT firstName , lastName FROM Person WHERE medicareNum = '" . $row['fatherMedicareNum'] . "'");
 
@@ -47,18 +47,18 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress)
 
             // if both mother and father available , print out their FName and Lname 
             if (isset($row2) && isset($row3)) {
-                echo "<td>" .$row3['firstName'] . " " .$row3['lastName']."</td>";
-                echo "<td>" .$row2['firstName'] . " " .$row2['lastName']."</td>";
+                echo "<td>" . $row3['firstName'] . " " . $row3['lastName'] . "</td>";
+                echo "<td>" . $row2['firstName'] . " " . $row2['lastName'] . "</td>";
 
 
                 // if mother is available but father isnt 
             } elseif (isset($row2) && !isset($row3)) {
                 echo "<td>N/A</td>";
-                echo "<td>" .$row2['firstName'] . " " .$row2['lastName']."</td>";
+                echo "<td>" . $row2['firstName'] . " " . $row2['lastName'] . "</td>";
 
                 // if father is available but mother isnt 
             } elseif (!isset($row2) && isset($row3)) {
-                echo "<td>" .$row3['firstName'] . " " .$row3['lastName']."</td>";
+                echo "<td>" . $row3['firstName'] . " " . $row3['lastName'] . "</td>";
                 echo "<td>N/A</td>";
                 echo nl2br("\nMother's Name = N/A " . "\nFather's Name = " . $row3['firstName'] . " " . $row3['lastName']);
 
@@ -78,6 +78,7 @@ function allPeopleInSpecificAddress($mysqli, $specificAddress)
 } ?>
 <div id='listPeopleAtAddress' style='display: none'>
     <?php
+    $mysqli = MysqlConnection::getInstance()->getMysqli();
     $address = "1, 1st avenue";
     allPeopleInSpecificAddress($mysqli, $address); ?>
 </div>

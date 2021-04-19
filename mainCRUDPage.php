@@ -1,7 +1,7 @@
 <!--TODO: link to this page-->
 
 
-
+<script src="scripts/mainCRUDPage.js"></script>
 <h1>Administrative Search Page</h1>
 <!--TODO: Event Listener to display proper table-->
 
@@ -55,7 +55,7 @@
     <?php include "dbSearchesSubPages/listWorkersAtFacility.php" ?>
     <?php include "dbSearchesSubPages/listPositiveWorkers.php" ?>
     <?php include "dbSearchesSubPages/reportForRegions.php" ?>
-    <?php include "dbSearchesSubPages/listMessagesOfTimeFrame.php" ?>
+    <?php include "dbSearchesSubPages/listMessagesOfTimeframe.php" ?>
 
 </fieldset>
 
@@ -74,4 +74,3 @@
     </select>
 </fieldset>
 
-<script src="scripts/mainCRUDPage.js"></script>

@@ -1,12 +1,5 @@
 <?php
-// had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
-$host = "127.0.0.1:3307";
-$database = "kfc353_4";
-$username = "kfc353_4";
-$password = "Al3xB3st";
-
-// create connection
-$mysqli = new mysqli($host, $username, $password, $database);
+require_once "repository/MysqlConnection.php";
 // Lists all health workers in a specific facility (Number 15 from project guideline)
 function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
 
@@ -69,8 +62,8 @@ function listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility){
 <div id='listWorkersAtFacility' style='display: none'>
 
 <?php 
+$mysqli = MysqlConnection::getInstance()->getMysqli();
 $specificFacility = "Viau Public Health Center";
 listOfHealthWorkersInSpecificFacility($mysqli, $specificFacility);
-
 ?>
 </div>

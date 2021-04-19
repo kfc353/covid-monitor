@@ -1,12 +1,5 @@
 <?php
-// had a 127.0.0.1:3307 -> mysqlUrl:3306 port forwarding
-$host = "127.0.0.1:3307";
-$database = "kfc353_4";
-$username = "kfc353_4";
-$password = "Al3xB3st";
-
-// create connection
-$mysqli = new mysqli($host, $username, $password, $database);
+require_once "repository/MysqlConnection.php";
 // Lists all the regions (Number 13 from project guideline)
 function listOfAllRegions($mysqli)
 {
@@ -22,8 +15,8 @@ function listOfAllRegions($mysqli)
             $x = $i + 1;
 
             $cities = $mysqli->query("SELECT city FROM CityRegion WHERE region ='" . $row['region'] . "'");
-           
-            
+
+
             // prints out the region 
             echo nl2br("<h3>Region $x " . $row['region'] . "</h3>"); // writing into the webpage 
 
@@ -69,5 +62,8 @@ function listOfAllRegions($mysqli)
 }
 ?>
 <div id='listRegions' style='display: none'>
-    <?php listOfAllRegions($mysqli) ?>
+    <?php
+    $mysqli = MysqlConnection::getInstance()->getMysqli();
+
+    listOfAllRegions($mysqli) ?>
 </div>
