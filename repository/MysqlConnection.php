@@ -24,7 +24,6 @@ class MysqlConnection
     private function connectMysql()
     {
         $osInfo = self::getOSInfo();
-        echo $osInfo;
         if ($osInfo == null) {
             $host = "127.0.0.1:3307";
         } else {
@@ -35,9 +34,10 @@ class MysqlConnection
         $password = "Al3xB3st";
 
         echo $host;
+        echo $osInfo;
 
         // create connection
-        $this->connection = new mysqli($host, $username, $password, $database, 3306);
+        $this->connection = new mysqli($host, $username, $password, $database);
     }
 
     private static function getOSInfo()
