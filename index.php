@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/mainCRUDPage.css">
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="scripts/dbSearchesScript.js"></script>
+    <script defer src="scripts/dbSearchesScript.js"></script>
 </head>
 
 <body>
