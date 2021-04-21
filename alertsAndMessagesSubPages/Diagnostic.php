@@ -9,7 +9,9 @@ $password = "Al3xB3st";
 
 // create connection
 
-$mysqli = new mysqli($host, $username, $password, $database);
+$mysqli = MysqlConnection::getInstance()->getMysqli();
+
+
 
 if (
     isset( $_POST['personMedicareNum'] ) and isset( $_POST['healthWorkerMedicareNum']) and isset( $_POST['facilityName']) and isset( $_POST['testDate']) 

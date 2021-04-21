@@ -8,8 +8,8 @@ $username = "kfc353_4";
 $password = "Al3xB3st";
 
 // create connection
+$mysqli = MysqlConnection::getInstance()->getMysqli();
 
-$mysqli = new mysqli($host, $username, $password, $database);
 
 
 
