@@ -5,7 +5,7 @@ if (isset($_POST['medicareNumCreate'])) {
     $array['firstName'] = $_POST['firstNameCreate'];
     $array['lastName'] = $_POST['lastNameCreate'];
     $array['dateOfBirth'] = $_POST['dateOfBirthCreate'];
-    $array['phoneNumber'] = $_POST['phoneNumberCreate'];
+    $array['phoneNum'] = $_POST['phoneNumberCreate'];
     $array['address'] = $_POST['addressCreate'];
     $array['province'] = $_POST['provinceCreate'];
     $array['citizenship'] = $_POST['citizenshipCreate'];
@@ -28,7 +28,7 @@ if (isset($_POST['medicareNumCreate'])) {
     $array['firstName'] = $_POST['firstNameUpdate'];
     $array['lastName'] = $_POST['lastNameUpdate'];
     $array['dateOfBirth'] = $_POST['dateOfBirthUpdate'];
-    $array['phoneNumber'] = $_POST['phoneNumberUpdate'];
+    $array['phoneNum'] = $_POST['phoneNumberUpdate'];
     $array['address'] = $_POST['addressUpdate'];
     $array['province'] = $_POST['provinceUpdate'];
     $array['citizenship'] = $_POST['citizenshipUpdate'];

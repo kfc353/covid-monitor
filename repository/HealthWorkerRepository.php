@@ -9,7 +9,7 @@ class HealthWorkerRepository
         $mysqli = MysqlConnection::getInstance()->getMysqli();
         // check if we have a person in database?
         if (PersonRepository::findByMedicareNum($healthWorker->getMedicareNum())){
-            $stmt = $mysqli->prepare("INSERT INTO HealthWorker VALUES ?");
+            $stmt = $mysqli->prepare("INSERT INTO HealthWorker VALUES (?)");
             $medicareNum = $healthWorker->getMedicareNum();
             $stmt->bind_param("s", $medicareNum);
             $stmt->execute();

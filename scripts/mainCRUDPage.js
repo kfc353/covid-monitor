@@ -217,6 +217,46 @@ function displayDatabaseSearch() {
     }
 }
 
+function displayAlertsMessagesPage() {
+    var selectedOption = document.getElementById("alertsAndMessages").value;
+    hideAllAlertsAndMessages();
+    switch (selectedOption) {
+        case "setAlert":
+            var setAlertDiv = document.getElementById("setAlertDiv");
+            setAlertDiv.style.display = 'block';
+            console.log("setAlert");
+            break;
+        case "createMessageForPositive":
+            var createMessageForPositiveDiv = document.getElementById("createMessageForPositiveDiv");
+            createMessageForPositiveDiv.style.display = 'block';
+            console.log("create message for positive");
+            break;
+        case "followUpForm":
+            var followUpFormDiv = document.getElementById("followUpFormDiv");
+            followUpFormDiv.style.display = 'block';
+            console.log("follow up form");
+            break;
+        case "symptomProgress":
+            var symptomProgressDiv = document.getElementById("symptomProgressDiv");
+            symptomProgressDiv.style.display = 'block';
+            console.log("syptomProgress");
+            break;
+        case "createTables":
+            var createTablesDiv = document.getElementById("createTablesDiv");
+            createTablesDiv.style.display = 'block';
+            console.log("create tables");
+            break;
+    }
+}
+
+function hideAllAlertsAndMessages() {
+    document.getElementById("setAlertDiv").style.display = 'none';
+    document.getElementById("createMessageForPositiveDiv").style.display = 'none';
+    document.getElementById("followUpFormDiv").style.display = 'none';
+    document.getElementById("symptomProgressDiv").style.display = 'none';
+    document.getElementById("createTablesDiv").style.display = 'none';
+}
+
 // hides all tables
 function hideAllManagement() {
     document.getElementById("personCRUD").style.display = 'none';
@@ -238,7 +278,7 @@ function hideAllDbSearches() {
 
 }
 
-function hideAllOperations(){
+function hideAllOperations() {
     document.getElementById("personCreate").style.display = 'none';
     document.getElementById("personRemove").style.display = 'none';
     document.getElementById("personUpdate").style.display = 'none';
@@ -257,14 +297,4 @@ function hideAllOperations(){
     document.getElementById("groupZoneCreate").style.display = 'none';
     document.getElementById("groupZoneRemove").style.display = 'none';
     document.getElementById("groupZoneUpdate").style.display = 'none';
-}
-
-function getFromDate() {
-    let fromDateInput = document.getElementById("fromDate");
-    console.log(fromDateInput.value);
-}
-
-function getToDate() {
-    let toDateInput = document.getElementById("toDate");
-    console.log(toDateInput.value);
 }

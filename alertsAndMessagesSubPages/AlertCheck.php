@@ -1,3 +1,4 @@
+<div id="createTablesDiv" style="display: none;">
 <?php
 // Alexander Fulleringer 40005290
 // Prints out complete Alert History.
@@ -10,7 +11,6 @@ $password = "Al3xB3st";
 // create connection
 
 $mysqli = new mysqli($host, $username, $password, $database);
-echo $mysqli->host_info . "\n";
 
 $result = $mysqli->query("SELECT * FROM AlertHistory");
 for ($i = 0; $i < $result->num_rows; $i++) {
@@ -23,3 +23,5 @@ for ($i = 0; $i < $result->num_rows; $i++) {
   echo " region = " . $row['region'] . "\n";
 
 }
+?>
+</div>

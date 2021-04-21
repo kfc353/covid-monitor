@@ -10,17 +10,8 @@ $password = "Al3xB3st";
 // create connection
 
 $mysqli = new mysqli($host, $username, $password, $database);
-echo $mysqli->host_info . "\n";
 
-if (isset( $_POST['symptoms'])){
-    echo 'Form is not empty!' . '<br>';
-    $array = array_flip( $_POST['symptoms']);
-    //print_r($array);
-    //print_r( $_POST['symptoms']);
-}
-else {
-    exit('Form incomplete');
-}
+
 
 $medicareNum = $_POST['medicareNum'];
 $temperature = $_POST['temperature'];

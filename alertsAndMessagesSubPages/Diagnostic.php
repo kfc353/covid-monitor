@@ -10,7 +10,6 @@ $password = "Al3xB3st";
 // create connection
 
 $mysqli = new mysqli($host, $username, $password, $database);
-echo $mysqli->host_info . "<br>\n";
 
 if (
     isset( $_POST['personMedicareNum'] ) and isset( $_POST['healthWorkerMedicareNum']) and isset( $_POST['facilityName']) and isset( $_POST['testDate']) 
@@ -73,6 +72,4 @@ if ($testResult == "positive"){
     }
 }
 
-header("Location: ../index.php");
-exit();
 ?>

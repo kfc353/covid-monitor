@@ -23,6 +23,10 @@ class MysqlConnection
 
     private function connectMysql()
     {
+        // for local testing
+        // $host = "127.0.0.1:3307"; 
+        
+        // for concordia's website
         $host = "kfc353.encs.concordia.ca";
         $database = "kfc353_4";
         $username = "kfc353_4";

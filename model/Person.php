@@ -23,7 +23,7 @@ class Person
         $this->setPhoneNum($assocArray['phoneNum']);
         $this->setAddress($assocArray['address']);
         $this->setProvince($assocArray['province']);
-        $this->setPhoneNum($assocArray['phoneNumber']);
+        $this->setPhoneNum($assocArray['phoneNum']);
         $this->setCitizenship($assocArray['citizenship']);
         $this->setEmail($assocArray['email']);
         if (isset($assocArray['motherMedicareNum'])) {

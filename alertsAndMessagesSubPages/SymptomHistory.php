@@ -1,3 +1,4 @@
+<div id="symptomProgressDiv" style="display: block;">
 <?php
 // Alexander Fulleringer 40005290
 // Takes a medicare number and outputs their symptom history
@@ -10,7 +11,6 @@ $password = "Al3xB3st";
 // create connection
 
 $mysqli = new mysqli($host, $username, $password, $database);
-echo $mysqli->host_info . "\n";
 
 $medicareNumber = $_POST['medicareNum'];
 
@@ -39,3 +39,4 @@ while($row = mysqli_fetch_row($result)) {
 echo "</table>";
 ?>
 
+</div>
